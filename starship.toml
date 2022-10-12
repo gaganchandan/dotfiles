@@ -1,0 +1,41 @@
+format = """
+$username\
+$hostname\
+$directory\
+$line_break\
+$character\
+$cmd_duration\
+"""
+
+## FIRST LINE/ROW: Info & Status
+# First param ─┌
+[username]
+format = " [$user]($style) on "
+style_user = "bold blue"
+style_root = "bold red"
+show_always = true
+
+# Second param
+[hostname]
+format = "[$hostname]($style) in "
+style = "bold dimmed blue"
+trim_at = "-"
+ssh_only = false
+disabled = false
+
+# Third param
+[directory]
+style = "blue"
+#truncation_length = 0
+#truncate_to_repo = true
+#truncation_symbol = "repo: "
+read_only = ""
+
+[character] 
+success_symbol = "[ ❯](#707070)" 
+error_symbol = "[ ❯](#707070)" 
+
+[cmd_duration]
+disabled = true
+
+add_newline = false
