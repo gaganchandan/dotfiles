@@ -381,5 +381,3 @@ tnoremap <C-z> <C-\><C-n>
 vnoremap <C-z> <Esc>
 cnoremap <C-z> <C-C>
 nnoremap <C-z> <Esc>
-
-" Random comment
