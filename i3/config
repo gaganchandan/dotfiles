@@ -202,8 +202,8 @@ gaps outer 3
 gaps inner 5
 smart_gaps on
 
-# Firefox in fullscreen
-#for_window [class="firefox"] fullscreen enable
+# Apps in fullscreen
+for_window [class="evince"] fullscreen enable
 
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -225,6 +225,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
 
 # light-locker
+# exec --no-startup-id /opt/lightdm.py sleep
 exec_always --no-startup-id light-locker
 
 # bashtop

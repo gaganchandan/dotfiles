@@ -67,9 +67,9 @@ run_cmd() {
 		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
 		elif [[ $1 == '--hibernate' ]]; then
-			sleep 1 && systemctl hibernate
+			systemctl hibernate
 		elif [[ $1 == '--suspend' ]]; then
-			sleep 1 && systemctl suspend
+			systemctl suspend
 		elif [[ $1 == '--logout' ]]; then
 			if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
 				openbox --exit
@@ -99,7 +99,7 @@ case ${chosen} in
 		run_cmd --hibernate
         ;;
     $lock)
-		sleep 1 && /opt/blur.py ss && light-locker-command -l
+		light-locker-command -l
         ;;
     $suspend)
 		run_cmd --suspend
