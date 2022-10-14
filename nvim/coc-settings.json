@@ -1,7 +1,12 @@
 {
-  "diagnostic.checkCurrentLine": true,
-  "diagnostic.refreshOnInsertMode": true,
-  "languageserver": {
+    "isabelle.enable" : true, 
+    "isabelle.command" : "isabelle",
+    "isabelle.usePideExtensions" : false,
+    "isabelle.debug" : true,
+    "isabelle.useHtmlOutput" : true,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.refreshOnInsertMode": true,
+    "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",
       "args": [

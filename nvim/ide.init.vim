@@ -70,6 +70,10 @@ Plug 'honza/vim-snippets'
 Plug 'whonore/Coqtail'
 Plug 'vim-scripts/coq-syntax'
 
+" Isabelle
+"Plug 'ThreeFx/isabelle.vim'
+"Plug 'ThreeFx/coc-isabelle', {'do': 'yarn install --frozen-lockfile'}
+
 "*****************************************************************************
 "*****************************************************************************
 call plug#end()
@@ -509,6 +513,7 @@ autocmd FileType nerdtree nnoremap <buffer> <C-s> <C-w><Right><Cmd>12sp<CR>
 autocmd FileType nerdtree nnoremap <buffer> <C-x> <Esc>
 autocmd FileType nerdtree nnoremap <buffer> <C-d> <Esc>
 autocmd FileType nerdtree nnoremap <buffer> <C-m> <Esc>
+autocmd FileType nerdtree nnoremap <buffer> e <Esc>
 
 command! BufClose :bn|:bd!#
 nnoremap <silent> <C-d> <Cmd>BufClose<CR>
@@ -516,3 +521,7 @@ nnoremap <silent> <C-d> <Cmd>BufClose<CR>
 nnoremap <silent> <C-m> <Cmd>vsp<CR>
 
 set guifont=JetBrains\ Mono\ Nerd\ Font:h8.5
+
+" Isabelle
+au BufRead,BufNewFile *.thy setfiletype isabelle
+au BufRead,BufNewFile *.thy set conceallevel=2

@@ -381,3 +381,9 @@ tnoremap <C-z> <C-\><C-n>
 vnoremap <C-z> <Esc>
 cnoremap <C-z> <C-C>
 nnoremap <C-z> <Esc>
+
+" Isabelle
+au BufRead,BufNewFile *.thy setfiletype isabelle
+au BufRead,BufNewFile *.thy set conceallevel=2
+
+"hi Normal guifg=#aad2fa
