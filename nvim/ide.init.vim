@@ -375,7 +375,6 @@ endif
 "*****************************************************************************
 nnoremap ; :
 vnoremap ; :
-set completeopt=menu
 autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2 expandtab
 "set guifont=monospace:h8.5
 " hi Normal ctermbg=NONE guibg=NONE
@@ -525,3 +524,5 @@ set guifont=JetBrains\ Mono\ Nerd\ Font:h8.5
 " Isabelle
 au BufRead,BufNewFile *.thy setfiletype isabelle
 au BufRead,BufNewFile *.thy set conceallevel=2
+
+set completeopt=menu,noselect
