@@ -526,5 +526,7 @@ augroup my-glyph-palette
   autocmd! *
   autocmd FileType nerdtree call glyph_palette#apply()
 augroup END
+autocmd filetype nerdtree highlight ml_icon guifg=#e37933
+autocmd filetype nerdtree syn match ml_icon #λ# containedin=NERDTreeFlags
 autocmd filetype nerdtree highlight haskell_icon guifg=#a074c4
 autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
