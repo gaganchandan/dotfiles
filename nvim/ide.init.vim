@@ -5,32 +5,31 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/grep.vim'
-Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'ervandew/supertab'
 Plug 'liuchengxu/vim-clap'
-Plug 'famiu/nvim-reload'
 Plug 'tpope/vim-surround'
 Plug 'arcticicestudio/nord-vim'
 Plug 'shaunsingh/nord.nvim'
-Plug 'andersevenrud/nordic.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'navarasu/onedark.nvim'
+Plug 'folke/tokyonight.nvim'
 Plug 'akinsho/bufferline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'preservim/tagbar'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'preservim/nerdtree'
-Plug 'glepnir/dashboard-nvim'
+Plug 'lambdalisue/glyph-palette.vim'
+Plug 'goolord/alpha-nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-rhubarb' 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'nvim-lua/popup.nvim'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/limelight.vim'
 if isdirectory('/usr/local/opt/fzf')
@@ -69,10 +68,6 @@ Plug 'honza/vim-snippets'
 " Coq
 Plug 'whonore/Coqtail'
 Plug 'vim-scripts/coq-syntax'
-
-" Isabelle
-"Plug 'ThreeFx/isabelle.vim'
-"Plug 'ThreeFx/coc-isabelle', {'do': 'yarn install --frozen-lockfile'}
 
 "*****************************************************************************
 "*****************************************************************************
@@ -378,14 +373,12 @@ vnoremap ; :
 autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2 expandtab
 "set guifont=monospace:h8.5
 " hi Normal ctermbg=NONE guibg=NONE
-    
+
 " NERDTree
 let g:NERDTreeWinSize=30
-let g:NERDTreeExtensionHighlightColor = {}
-let g:NERDTreeExtensionHighlightColor['hs'] = "a074c4"
 augroup DIRCHANGE
-au!
-autocmd DirChanged global :NERDTreeCWD
+    au!
+    autocmd DirChanged global :NERDTreeCWD
 augroup END
 
 " Keymaps
@@ -410,14 +403,18 @@ inoremap <silent><expr> <cr> coc#pum#visible() && coc#pum#info()['index'] != -1 
 \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 nnoremap  <2-LeftMouse> <LeftMouse>i
 
-" dashboard-nvim
-command NewFile :enew | NERDTree | set showtabline=2 | set laststatus=2  | execute "normal \<C-W>\<C-W>" 
-command FileBrowser :enew | NERDTree | set showtabline=2 | set laststatus=2  | execute "normal \<C-W>\<C-W>" | Telescope file_browser
-let g:indentLine_fileTypeExclude = ['dashboard']
-lua require('dashboard-config')
-hi DashboardHeader guifg=#5e81ac
-hi DashboardCenter guifg=#d8dee9 
-hi DashboardFooter guifg=#8fbcbb 
+" alpha-nvim
+command NewFile :enew | set showtabline=2 | set laststatus=2 | NERDTree | execute "normal \<C-W>\<C-W>"
+command FileBrowser :enew | NERDTree | execute "normal \<C-W>\<C-W>" |  set showtabline=2 | set laststatus=2 | Telescope file_browser 
+lua  require('alpha').setup(require'dashboard-config'.config)
+autocmd User AlphaReady set laststatus=0 
+autocmd User AlphaReady set showtabline=0 
+
+" let g:indentLine_fileTypeExclude = ['dashboard']
+" lua require('dashboard-config')
+" hi DashboardHeader guifg=#5e81ac
+" hi DashboardCenter guifg=#d8dee9 
+" hi DashboardFooter guifg=#8fbcbb 
 
 " telescope
 lua require('telescope-config')
@@ -445,7 +442,6 @@ tnoremap <expr> <C-v> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 " lualine
 lua require('lualine-config')
-let g:haskell_classic_highlighting = 1
 
 " Disable lualine in NERDTree
 augroup filetype_nerdtree
@@ -525,4 +521,10 @@ set guifont=JetBrains\ Mono\ Nerd\ Font:h8.5
 au BufRead,BufNewFile *.thy setfiletype isabelle
 au BufRead,BufNewFile *.thy set conceallevel=2
 
-set completeopt=menu,noselect
+" Coloured icons
+augroup my-glyph-palette
+  autocmd! *
+  autocmd FileType nerdtree call glyph_palette#apply()
+augroup END
+autocmd filetype nerdtree highlight haskell_icon guifg=#a074c4
+autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags

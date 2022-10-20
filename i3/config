@@ -209,7 +209,7 @@ for_window [class="evince"] fullscreen enable
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Nautilus
-bindsym $mod+Control+Shift+Return exec --no-startup-id thunar
+bindsym $mod+Control+Shift+Return exec --no-startup-id nautilus
 
 # Rofi
 bindsym $mod+Shift+l exec --no-startup-id /home/gagan/.config/rofi/launchers/type-6/launcher.sh

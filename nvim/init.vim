@@ -5,7 +5,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'Raimondi/delimitMate'
 Plug 'ervandew/supertab'
 Plug 'liuchengxu/vim-clap'

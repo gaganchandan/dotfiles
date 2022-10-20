@@ -57,4 +57,7 @@ colors:
     white: '#aeb3bb'
 
 font:
+  normal:
+    family:
+      "Noto Sans Mono Nerd Font"
   size : 9
