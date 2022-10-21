@@ -1,7 +1,7 @@
 require('bufferline').setup {
     highlights = {
       fill = {
-        bg = '#12151a',
+        bg = '#282e38',
       },
       background = {
         bg = "#21252e",
@@ -22,15 +22,15 @@ require('bufferline').setup {
         bg = "#21252e",
       },
       separator_selected = {
-        fg = "#12151a",
+        fg = "#282e38",
         bg = "#3b4252",
       },
       separator = {
-        fg = "#12151a",
+        fg = "#282e38",
         bg = "#21252e",
       },
       separator_visible = {
-        fg = "#12151a",
+        fg = "#282e38",
         bg = "#21252e",
       },
       indicator_visible = {
@@ -52,7 +52,7 @@ require('bufferline').setup {
         bg = "#3b4252",
       },
       tab_close = {
-        bg = "#12151a",
+        bg = "#282e38",
       },
       diagnostic = {
         bg = "#21252e",
@@ -137,9 +137,11 @@ require('bufferline').setup {
       },
    },
     options = {
-        separator_style = "padded_slant",
-        close_command = "call Quit()",
+        separator_style = "thin",
         close_icon = "",
         diagnostics = "coc",
+        offsets = {
+            { filetype = "NvimTree", text = "File Explorer", padding = 0 },
         },
     }
+}

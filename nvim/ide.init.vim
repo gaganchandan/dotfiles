@@ -15,6 +15,7 @@ Plug 'shaunsingh/nord.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'navarasu/onedark.nvim'
 Plug 'folke/tokyonight.nvim'
 Plug 'akinsho/bufferline.nvim'
@@ -22,15 +23,9 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'preservim/tagbar'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'preservim/nerdtree'
-Plug 'lambdalisue/glyph-palette.vim'
 Plug 'goolord/alpha-nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-rhubarb' 
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 Plug 'nvim-lua/popup.nvim'
-Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/limelight.vim'
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -127,7 +122,6 @@ set fillchars=eob:\
 
 " Nord
 let g:nord_contrast=v:true
-let g:nord_borders=v:true
 let g:nord_cursorline_transparent=v:true
 colorscheme nord
 
@@ -209,18 +203,7 @@ endif
 "cnoreabbrev W w
 "cnoreabbrev Q q
 "cnoreabbrev Qall qall
-
-"" NERDTree configuration
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
-nnoremap <silent> <F2> :NERDTreeFind<CR>
-nnoremap <silent> <F3> :NERDTreeToggle<CR>
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
@@ -371,15 +354,6 @@ endif
 nnoremap ; :
 vnoremap ; :
 autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2 expandtab
-"set guifont=monospace:h8.5
-" hi Normal ctermbg=NONE guibg=NONE
-
-" NERDTree
-let g:NERDTreeWinSize=30
-augroup DIRCHANGE
-    au!
-    autocmd DirChanged global :NERDTreeCWD
-augroup END
 
 " Keymaps
 nnoremap <silent>    <C-n> <Cmd>enew<CR>
@@ -404,11 +378,11 @@ inoremap <silent><expr> <cr> coc#pum#visible() && coc#pum#info()['index'] != -1 
 nnoremap  <2-LeftMouse> <LeftMouse>i
 
 " alpha-nvim
-command NewFile :enew | set showtabline=2 | set laststatus=2 | NERDTree | execute "normal \<C-W>\<C-W>"
-command FileBrowser :enew | NERDTree | execute "normal \<C-W>\<C-W>" |  set showtabline=2 | set laststatus=2 | Telescope file_browser 
+command NewFile :enew | set showtabline=2 | set laststatus=2 | NvimTreeFocus | execute "normal \<C-W>\<C-W>"
+command FileBrowser :enew | NvimTreeFocus | execute "normal \<C-W>\<C-W>" |  set showtabline=2 | set laststatus=2 | Telescope file_browser 
 lua  require('alpha').setup(require'dashboard-config'.config)
 autocmd User AlphaReady set laststatus=0 
-autocmd User AlphaReady set showtabline=0 
+autocmd User AlphaReady set laststatus=0 
 
 " let g:indentLine_fileTypeExclude = ['dashboard']
 " lua require('dashboard-config')
@@ -442,18 +416,6 @@ tnoremap <expr> <C-v> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 " lualine
 lua require('lualine-config')
-
-" Disable lualine in NERDTree
-augroup filetype_nerdtree
-    au!
-    au FileType nerdtree call s:disable_lightline_on_nerdtree()
-    au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
-augroup END
-
-fu s:disable_lightline_on_nerdtree() abort
-    let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree') + 1
-    call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
-endfu
 
 " Move to and from windows
 nnoremap <C-Up> <C-W><Up>
@@ -499,16 +461,15 @@ cnoreabbrev Qall qall
 cnoreabbrev q Q
 cnoreabbrev Q! Q
 
-autocmd FileType nerdtree nnoremap <buffer> ; <Esc>
-autocmd FileType nerdtree nnoremap <buffer> : <Esc>
-autocmd FileType nerdtree nnoremap <buffer> <C-c> <Esc>
-autocmd FileType nerdtree nnoremap <buffer> <C-t> <C-w><Right><Cmd>T<CR>
-autocmd FileType nerdtree nnoremap <buffer> <C-n> <C-w><Right><Cmd>enew<CR>
-autocmd FileType nerdtree nnoremap <buffer> <C-s> <C-w><Right><Cmd>12sp<CR>
-autocmd FileType nerdtree nnoremap <buffer> <C-x> <Esc>
-autocmd FileType nerdtree nnoremap <buffer> <C-d> <Esc>
-autocmd FileType nerdtree nnoremap <buffer> <C-m> <Esc>
-autocmd FileType nerdtree nnoremap <buffer> e <Esc>
+autocmd FileType NvimTree nnoremap <buffer> ; <Esc>
+autocmd FileType NvimTree nnoremap <buffer> : <Esc>
+autocmd FileType NvimTree nnoremap <buffer> <C-c> <Esc>
+autocmd FileType NvimTree nnoremap <buffer> <C-t> <C-w><Right><Cmd>T<CR>
+autocmd FileType NvimTree nnoremap <buffer> <C-n> <C-w><Right><Cmd>enew<CR>
+autocmd FileType NvimTree nnoremap <buffer> <C-s> <C-w><Right><Cmd>12sp<CR>
+autocmd FileType NvimTree nnoremap <buffer> <C-x> <Esc>
+autocmd FileType NvimTree nnoremap <buffer> <C-d> <Esc>
+autocmd FileType NvimTree nnoremap <buffer> <C-m> <Esc>
 
 command! BufClose :bn|:bd!#
 nnoremap <silent> <C-d> <Cmd>BufClose<CR>
@@ -521,12 +482,14 @@ set guifont=JetBrains\ Mono\ Nerd\ Font:h8.5
 au BufRead,BufNewFile *.thy setfiletype isabelle
 au BufRead,BufNewFile *.thy set conceallevel=2
 
-" Coloured icons
-augroup my-glyph-palette
-  autocmd! *
-  autocmd FileType nerdtree call glyph_palette#apply()
-augroup END
-autocmd filetype nerdtree highlight ml_icon guifg=#e37933
-autocmd filetype nerdtree syn match ml_icon #λ# containedin=NERDTreeFlags
-autocmd filetype nerdtree highlight haskell_icon guifg=#a074c4
-autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
+"NvimTree
+lua require('nvim-tree-config')
+hi NvimTreeWinSeparator guifg=#2e3440
+hi NvimTreeNormal guibg=#282e38
+hi NvimTreeRootFolder guifg=#81a1c1
+
+function! Prompt()
+    echo "❯"
+endfunction
+
+
