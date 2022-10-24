@@ -139,6 +139,7 @@ require('bufferline').setup {
     options = {
         separator_style = "thin",
         close_icon = "",
+        close_command = "call Quit()",
         diagnostics = "coc",
         offsets = {
             { filetype = "NvimTree", text = "File Explorer", padding = 0 },

@@ -196,7 +196,7 @@ exec --no-startup-id picom -b
 
 # Remove titlebars
 for_window [class=".*"] border pixel 0
-
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
 # Gaps
 gaps outer 3
 gaps inner 5

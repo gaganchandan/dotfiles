@@ -1,11 +1,27 @@
 {
-    "isabelle.enable" : true, 
-    "isabelle.command" : "isabelle",
-    "isabelle.usePideExtensions" : false,
-    "isabelle.debug" : true,
-    "isabelle.useHtmlOutput" : true,
     "diagnostic.checkCurrentLine": true,
     "diagnostic.refreshOnInsertMode": true,
+    "diagnostic.floatConfig": {
+        "border" : true,
+        "rounded" : true,
+        "borderhighlight" : "Keyword"
+    },
+    "suggest.floatConfig": {
+        "border" : true,
+        "rounded" : true,
+        "borderhighlight" : "Keyword"
+    },
+    "signature.floatConfig": {
+        "border" : true,
+        "rounded" : true,
+        "borderhighlight" : "Keyword"
+    },
+    "hover.floatConfig": {
+        "border" : true,
+        "rounded" : true,
+        "borderhighlight" : "Keyword"
+    },
+
     "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",
@@ -30,6 +46,7 @@
         "args": ["config", "exec", "--", "ocamllsp"],
         "filetypes": ["ocaml", "reason"]
     }
-  }
+  },
+  "clangd.inlayHints.enable" : false
 }
 

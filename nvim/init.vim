@@ -18,6 +18,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'navarasu/onedark.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'mboughaba/i3config.vim'
+Plug 'elkowar/yuck.vim'
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
@@ -30,28 +31,13 @@ Plug 'xolox/vim-misc'
 "*****************************************************************************
 "" Custom bundles - common
 "*****************************************************************************
-
-" c
-Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
-Plug 'ludwig/split-manpage.vim'
-
 " haskell
 Plug 'neovimhaskell/haskell-vim'
-
-" python
-Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-Plug 'jpalardy/vim-slime', { 'for': 'python' }
-Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'godlygeek/tabular'
 Plug 'elzr/vim-json'
-Plug 'honza/vim-snippets'
-
-" Coq
-Plug 'whonore/Coqtail'
-Plug 'vim-scripts/coq-syntax'
 
 "*****************************************************************************
 "*****************************************************************************

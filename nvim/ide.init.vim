@@ -27,6 +27,7 @@ Plug 'goolord/alpha-nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/popup.nvim'
 Plug 'junegunn/limelight.vim'
+Plug 'sbdchd/neoformat'
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
@@ -40,25 +41,13 @@ Plug 'xolox/vim-misc'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
-
-" c
-Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
-Plug 'ludwig/split-manpage.vim'
-
 " haskell
 Plug 'neovimhaskell/haskell-vim'
-Plug 'alx741/vim-hindent'
-
-" python
-Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-Plug 'jpalardy/vim-slime', { 'for': 'python' }
-Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'godlygeek/tabular'
 Plug 'elzr/vim-json'
-Plug 'honza/vim-snippets'
 
 " Coq
 Plug 'whonore/Coqtail'
@@ -112,6 +101,8 @@ endif
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
+colorscheme nord
+
 set termguicolors
 syntax on
 set number
@@ -119,11 +110,9 @@ let no_buffers_menu=1
 set colorcolumn=0
 set noruler
 set fillchars=eob:\ 
-
-" Nord
-let g:nord_contrast=v:true
-let g:nord_cursorline_transparent=v:true
-colorscheme nord
+set cursorline
+hi CursorLine guibg=#373e4d
+hi CursorLineNR guibg=#373e4d
 
 " Better command line completion 
 set wildmenu
@@ -376,13 +365,15 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <cr> coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() :
 \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 nnoremap  <2-LeftMouse> <LeftMouse>i
+highlight CocFloating guibg=#2e3440
+nmap <C-r> <Plug>(coc-rename)
 
 " alpha-nvim
 command NewFile :enew | set showtabline=2 | set laststatus=2 | NvimTreeFocus | execute "normal \<C-W>\<C-W>"
 command FileBrowser :enew | NvimTreeFocus | execute "normal \<C-W>\<C-W>" |  set showtabline=2 | set laststatus=2 | Telescope file_browser 
 lua  require('alpha').setup(require'dashboard-config'.config)
 autocmd User AlphaReady set laststatus=0 
-autocmd User AlphaReady set laststatus=0 
+autocmd User AlphaReady set showtabline=0 
 
 " let g:indentLine_fileTypeExclude = ['dashboard']
 " lua require('dashboard-config')
@@ -469,12 +460,12 @@ autocmd FileType NvimTree nnoremap <buffer> <C-n> <C-w><Right><Cmd>enew<CR>
 autocmd FileType NvimTree nnoremap <buffer> <C-s> <C-w><Right><Cmd>12sp<CR>
 autocmd FileType NvimTree nnoremap <buffer> <C-x> <Esc>
 autocmd FileType NvimTree nnoremap <buffer> <C-d> <Esc>
-autocmd FileType NvimTree nnoremap <buffer> <C-m> <Esc>
+autocmd FileType NvimTree nnoremap <buffer> <C-f> <Esc>
 
 command! BufClose :bn|:bd!#
 nnoremap <silent> <C-d> <Cmd>BufClose<CR>
 
-nnoremap <silent> <C-m> <Cmd>vsp<CR>
+nnoremap <silent> <C-f> <Cmd>vsp<CR>
 
 set guifont=JetBrains\ Mono\ Nerd\ Font:h8.5
 
@@ -482,14 +473,31 @@ set guifont=JetBrains\ Mono\ Nerd\ Font:h8.5
 au BufRead,BufNewFile *.thy setfiletype isabelle
 au BufRead,BufNewFile *.thy set conceallevel=2
 
-"NvimTree
+" NvimTree
 lua require('nvim-tree-config')
 hi NvimTreeWinSeparator guifg=#2e3440
 hi NvimTreeNormal guibg=#282e38
 hi NvimTreeRootFolder guifg=#81a1c1
+hi NvimTreeWindowPicker guibg=#3b4252
+au FileType NvimTree lua vim.api.nvim_buf_set_keymap(0, 'n', '<C-d>', ':cd', {})
 
-function! Prompt()
-    echo "❯"
-endfunction
+" Neoformat
+augroup fmt
+      autocmd!
+      autocmd BufWritePre * undojoin | Neoformat
+augroup END
+let g:neoformat_ocaml_ocamlformat = {
+                \ 'exe': 'ocamlformat',
+            \ 'no_append': 1,
+            \ 'stdin': 1,
+            \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-']
+            \ }
 
+let g:neoformat_enabled_ocaml = ['ocamlformat']
+
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
 
