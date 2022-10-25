@@ -4,15 +4,12 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "" General Plugins
 "*****************************************************************************
 Plug 'tpope/vim-commentary'
-Plug 'vim-scripts/grep.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'ervandew/supertab'
-Plug 'liuchengxu/vim-clap'
 Plug 'tpope/vim-surround'
 Plug 'arcticicestudio/nord-vim'
 Plug 'shaunsingh/nord.nvim'
-Plug 'sheerun/vim-polyglot'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-tree/nvim-tree.lua'
@@ -24,20 +21,23 @@ Plug 'preservim/tagbar'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'goolord/alpha-nvim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/popup.nvim'
 Plug 'junegunn/limelight.vim'
 Plug 'sbdchd/neoformat'
-if isdirectory('/usr/local/opt/fzf')
-  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-else
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-  Plug 'junegunn/fzf.vim'
-endif
 Plug 'nvim-lua/plenary.nvim'
-Plug 'xolox/vim-misc'
-
-
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'VonHeikemen/lsp-zero.nvim'
+Plug 'onsails/lspkind.nvim'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -52,6 +52,9 @@ Plug 'elzr/vim-json'
 " Coq
 Plug 'whonore/Coqtail'
 Plug 'vim-scripts/coq-syntax'
+
+" C
+Plug 'vim-scripts/c.vim'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -122,34 +125,20 @@ set mouse=a
 
 set mousemodel=popup
 set t_Co=256
-set guioptions=egmrti
-set gfn=Monospace\ 10
 
-if has("gui_running")
-  if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h12
-    set transparency=7
-  endif
-else
-  let g:CSApprox_loaded = 1
+let g:CSApprox_loaded = 1
 
-  " IndentLine
-  let g:indentLine_enabled = 1
-  let g:indentLine_concealcursor = ''
-  let g:indentLine_char = '┆'
-  let g:indentLine_faster = 1
-
-  
-endif
-
-
+" IndentLine
+let g:indentLine_enabled = 1
+let g:indentLine_concealcursor = ''
+let g:indentLine_char = '┆'
+let g:indentLine_faster = 1
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
 
 au TermEnter * setlocal scrolloff=0
 au TermLeave * setlocal scrolloff=3
-
 
 "" Status bar
 set laststatus=2
@@ -158,47 +147,8 @@ set laststatus=2
 set modeline
 set modelines=10
 
-set title
-set titleold="Terminal"
-set titlestring=%F
-
-" Status line
-
-"if exists("g:neovide")
-"   set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\ \|\ %{strftime('%c')}\ \|
-"else
-"    set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)
-"endif
-
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
 nnoremap n nzzzv
 nnoremap N Nzzzv
-
-if exists("*fugitive#statusline")
-  set statusline+=%{fugitive#statusline()}
-endif
-
-"*****************************************************************************
-"" Abbreviations
-"*****************************************************************************
-"cnoreabbrev W! w!
-"cnoreabbrev Q! q!
-"cnoreabbrev Qall! qall!
-"cnoreabbrev Wq wq
-"cnoreabbrev Wa wa
-"cnoreabbrev wQ wq
-"cnoreabbrev WQ wq
-"cnoreabbrev W w
-"cnoreabbrev Q q
-"cnoreabbrev Qall qall
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
-
-" grep.vim
-nnoremap <silent> <leader>f :Rgrep<CR>
-let Grep_Default_Options = '-IR'
-let Grep_Skip_Files = '*.log *.db'
-let Grep_Skip_Dirs = '.git node_modules'
 
 "*****************************************************************************
 "" Commands
@@ -220,12 +170,6 @@ endif
 "*****************************************************************************
 "" Autocmd Rules
 "*****************************************************************************
-"" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
-augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync maxlines=200
-augroup END
-
 "" Remember cursor position
 augroup vimrc-remember-cursor-position
   autocmd!
@@ -238,38 +182,7 @@ augroup vimrc-wrapping
   autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
-"" make/cmake
-augroup vimrc-make-cmake
-  autocmd!
-  autocmd FileType make setlocal noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
-augroup END
-
 set autoread
-
-"" fzf.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
-
-" The Silver Searcher
-if executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-
-" ripgrep
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
-
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>e :FZF -m<CR>
-"Recovery commands from history through FZF
-nmap <leader>y :History:<CR>
 
 " Disable visualbell
 set noerrorbells visualbell t_vb=
@@ -329,13 +242,6 @@ let g:vim_markdown_json_frontmatter = 1
 "coq
 let g:coqtail_coq_path = "/usr/bin/"
 let g:coqtail_coq_prog = "coqidetop.opt"
-"*****************************************************************************
-"*****************************************************************************
-
-"" Include user's local vim config
-if filereadable(expand("~/.config/nvim/local_init.vim"))
-  source ~/.config/nvim/local_init.vim
-endif
 
 "*****************************************************************************
 ""User defined
@@ -355,18 +261,6 @@ nnoremap <silent>    <C-S-A-Right> <Cmd>BufferLineMoveNext<CR>
 nnoremap <silent>    <C-x> <Cmd>:call Quit()<CR>
 
 lua require("bufferline-config")
-
-" coc.nvim
-inoremap <silent><expr> <TAB>
-\ coc#pum#visible() ? coc#pum#next(1) :
-\ CheckBackspace() ? "\<Tab>" :
-\ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <silent><expr> <cr> coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() :
-\ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-nnoremap  <2-LeftMouse> <LeftMouse>i
-highlight CocFloating guibg=#2e3440
-nmap <C-r> <Plug>(coc-rename)
 
 " alpha-nvim
 command NewFile :enew | set showtabline=2 | set laststatus=2 | NvimTreeFocus | execute "normal \<C-W>\<C-W>"
@@ -492,7 +386,6 @@ let g:neoformat_ocaml_ocamlformat = {
             \ 'stdin': 1,
             \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-']
             \ }
-
 let g:neoformat_enabled_ocaml = ['ocamlformat']
 
 augroup CursorLineOnlyInActiveWindow
@@ -501,3 +394,23 @@ augroup CursorLineOnlyInActiveWindow
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
+""**********************************************************************
+" LSP and related config
+"***********************************************************************
+hi Border guifg=#81a1c1 guibg=#2e3440
+hi Pmenu guibg=#2e3440
+
+lua require('lsp')
+
+set updatetime=300
+autocmd InsertEnter * set updatetime=20000
+autocmd InsertLeave * set updatetime=300
+
+hi FloatBorder guifg=#81a1c1
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#a1c7ed
+"***********************************************************************
+"***********************************************************************
+
+let $PATH="/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bin:/home/gagan/.local/bin:/home/gagan/.ghcup/ghc/9.4.2/bin/:/home/gagan/.ghcup/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/home/gagan/.cabal/bin/"
+
+autocmd BufRead,BufNewFile * setlocal signcolumn=yes

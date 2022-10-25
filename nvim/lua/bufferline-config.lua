@@ -140,7 +140,7 @@ require('bufferline').setup {
         separator_style = "thin",
         close_icon = "",
         close_command = "call Quit()",
-        diagnostics = "coc",
+        diagnostics = "nvim_lsp",
         offsets = {
             { filetype = "NvimTree", text = "File Explorer", padding = 0 },
         },
