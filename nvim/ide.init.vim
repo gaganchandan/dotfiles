@@ -137,6 +137,8 @@ let g:indentLine_faster = 1
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
 
+highlight! Terminal guibg=#282e38
+au TermEnter * setlocal winhighlight=Normal:Terminal
 au TermEnter * setlocal scrolloff=0
 au TermLeave * setlocal scrolloff=3
 
@@ -414,3 +416,4 @@ highlight! CmpItemAbbrMatch guibg=NONE guifg=#a1c7ed
 let $PATH="/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bin:/home/gagan/.local/bin:/home/gagan/.ghcup/ghc/9.4.2/bin/:/home/gagan/.ghcup/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/home/gagan/.cabal/bin/"
 
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes
+

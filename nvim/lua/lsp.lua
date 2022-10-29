@@ -33,3 +33,5 @@ require("mason").setup({
          border = "double",
     },
 })
+
+require('lspconfig.ui.windows').default_options.border = 'double'

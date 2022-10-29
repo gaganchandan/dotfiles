@@ -15,7 +15,7 @@ require('telescope').setup {
         file_browser = {
             mappings = {
                 ["i"] = {
-                    ["<C-]>"] = fb_actions.change_cwd,
+                    ["<C-d>"] = fb_actions.change_cwd,
                     ["<C-h>"] = fb_actions.goto_home_dir
                 },
             },
