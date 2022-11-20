@@ -3,9 +3,8 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "" General Plugins
 "*****************************************************************************
 Plug 'tpope/vim-commentary'
-Plug 'vim-scripts/CSApprox'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'Raimondi/delimitMate'
+Plug 'windwp/nvim-autopairs'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'arcticicestudio/nord-vim'
@@ -13,9 +12,8 @@ Plug 'shaunsingh/nord.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'navarasu/onedark.nvim'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'mboughaba/i3config.vim'
 Plug 'nvim-lua/plenary.nvim'
-
+Plug 'nvim-treesitter/nvim-treesitter'
 "*****************************************************************************
 "" Custom bundles - common
 "*****************************************************************************
@@ -278,9 +276,13 @@ tnoremap <C-z> <C-\><C-n>
 vnoremap <C-z> <Esc>
 cnoremap <C-z> <C-C>
 nnoremap <C-z> <Esc>
+nnoremap a i
 
 " Isabelle
 au BufRead,BufNewFile *.thy setfiletype isabelle
 au BufRead,BufNewFile *.thy set conceallevel=2
 
 set updatetime=300
+
+"Nvim autopairs
+lua require('nvim-autopairs').setup()

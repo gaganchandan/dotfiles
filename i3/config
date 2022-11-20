@@ -198,9 +198,9 @@ exec --no-startup-id picom -b
 for_window [class=".*"] border pixel 0
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
 # Gaps
-gaps outer 3
+gaps outer -2
 gaps inner 5
-smart_gaps on
+smart_gaps off
 
 # Apps in fullscreen
 for_window [class="evince"] fullscreen enable
@@ -208,8 +208,8 @@ for_window [class="evince"] fullscreen enable
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-# Nautilus
-bindsym $mod+Control+Shift+Return exec --no-startup-id nautilus
+# thunar
+bindsym $mod+Control+Shift+Return exec --no-startup-id thunar
 
 # Rofi
 bindsym $mod+Shift+l exec --no-startup-id /home/gagan/.config/rofi/launchers/type-6/launcher.sh
@@ -230,3 +230,6 @@ exec_always --no-startup-id light-locker
 
 # bashtop
 bindsym Control+Mod1+Delete exec --no-startup-id alacritty -o font.size=9 -o font.normal.family="JetBrains Mono Nerd Font" -e bpytop
+
+# enable touchpad natural scrolling
+exec_always --no-startup-id xinput set-prop 10 libinput\ Natural\ Scrolling\ Enabled 1

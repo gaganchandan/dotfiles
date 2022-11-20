@@ -60,13 +60,11 @@ require("nvim-tree").setup({
   open_on_tab = false,
   filters = {
     dotfiles = true,
-    exclude = { "Books" },
+    exclude = {".config"},
+    custom = {"Books"},
   },
   renderer = {
     group_empty = false,
-  },
-  update_focused_file = {
-    enable = true,
   },
   actions = {
     change_dir = { enable = true, global = true, }

@@ -4,7 +4,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "" General Plugins
 "*****************************************************************************
 Plug 'tpope/vim-commentary'
-Plug 'Raimondi/delimitMate'
+Plug 'windwp/nvim-autopairs'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
@@ -38,11 +38,13 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'VonHeikemen/lsp-zero.nvim'
 Plug 'onsails/lspkind.nvim'
+Plug 'kana/vim-textobj-user'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
 " haskell
 Plug 'neovimhaskell/haskell-vim'
+Plug 'neovimhaskell/nvim-hs.vim'
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
@@ -53,9 +55,11 @@ Plug 'elzr/vim-json'
 Plug 'whonore/Coqtail'
 Plug 'vim-scripts/coq-syntax'
 
-" C
-Plug 'vim-scripts/c.vim'
+" Racket 
+Plug 'wlangstroth/vim-racket'
 
+" Agda
+Plug 'isovector/cornelis'
 "*****************************************************************************
 "*****************************************************************************
 call plug#end()
@@ -317,9 +321,10 @@ vnoremap <C-z> <Esc>
 cnoremap <C-z> <C-C>
 nnoremap <C-z> <Esc>
 snoremap <C-z> <Esc>
+nnoremap a i
 
 function Quit()
-    if winnr('$') == 2
+    if len(filter(nvim_list_wins(), {k,v->nvim_win_get_config(v).relative==""})) == 2
         bp | sp | bn | bd!
     else
         quit!
@@ -328,7 +333,7 @@ endfunction
 command Q :call Quit()
 
 function Close()
-    if winnr('$') == 2
+    if len(filter(nvim_list_wins(), {k,v->nvim_win_get_config(v).relative==""})) == 2
         echo ""
     else
         close
@@ -376,6 +381,7 @@ hi NvimTreeNormal guibg=#282e38
 hi NvimTreeRootFolder guifg=#81a1c1
 hi NvimTreeWindowPicker guibg=#3b4252
 au FileType NvimTree lua vim.api.nvim_buf_set_keymap(0, 'n', '<C-d>', ':cd', {})
+nnoremap <C-A-t> <Cmd>NvimTreeToggle<CR>
 
 " Neoformat
 augroup fmt
@@ -404,9 +410,9 @@ hi Pmenu guibg=#2e3440
 
 lua require('lsp')
 
-set updatetime=300
-autocmd InsertEnter * set updatetime=20000
-autocmd InsertLeave * set updatetime=300
+set updatetime=100
+autocmd InsertEnter * set updatetime=750
+autocmd InsertLeave * set updatetime=100
 
 hi FloatBorder guifg=#81a1c1
 highlight! CmpItemAbbrMatch guibg=NONE guifg=#a1c7ed
@@ -417,3 +423,19 @@ let $PATH="/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bi
 
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 
+" nvim-autopairs
+lua require ("nvim-autopairs").setup()
+
+" Coqtail
+hi def CoqtailChecked guibg=#4c566a
+hi def CoqtailSent guibg=#4c566a
+
+" Coq
+autocmd FileType coq nnoremap <C-n> <Cmd>CoqNext<CR>
+autocmd FileType coq nnoremap <C-u> <Cmd>CoqUndo<CR>
+autocmd FileType coq nnoremap <C-l> <Cmd>CoqToLine<CR>
+autocmd FileType coq nnoremap <C-t> <Cmd>CoqToTop<CR>
+autocmd BufReadPost *.v CoqStart | NvimTreeClose
+
+" Cornelis
+au BufWritePost *.agda execute "normal! :CornelisLoad\<CR>"
