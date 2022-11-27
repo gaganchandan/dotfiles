@@ -142,7 +142,7 @@ require('bufferline').setup {
         close_command = "call Quit()",
         diagnostics = "nvim_lsp",
         offsets = {
-            { filetype = "NvimTree", text = "File Explorer", padding = 0 },
+            { filetype = "NvimTree", text = "File Explorer", padding = 1 },
         },
     }
 }

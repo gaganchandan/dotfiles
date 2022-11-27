@@ -39,6 +39,7 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'VonHeikemen/lsp-zero.nvim'
 Plug 'onsails/lspkind.nvim'
 Plug 'kana/vim-textobj-user'
+Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -141,7 +142,7 @@ let g:indentLine_faster = 1
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
 
-highlight! Terminal guibg=#282e38
+highlight! Terminal guibg=#21252e
 au TermEnter * setlocal winhighlight=Normal:Terminal
 au TermEnter * setlocal scrolloff=0
 au TermLeave * setlocal scrolloff=3
@@ -376,7 +377,7 @@ au BufRead,BufNewFile *.thy set conceallevel=2
 
 " NvimTree
 lua require('nvim-tree-config')
-hi NvimTreeWinSeparator guifg=#2e3440
+hi NvimTreeWinSeparator guibg=#282e38 guifg=#282e38
 hi NvimTreeNormal guibg=#282e38
 hi NvimTreeRootFolder guifg=#81a1c1
 hi NvimTreeWindowPicker guibg=#3b4252
@@ -411,7 +412,7 @@ hi Pmenu guibg=#2e3440
 lua require('lsp')
 
 set updatetime=100
-autocmd InsertEnter * set updatetime=750
+autocmd InsertEnter * set updatetime=4000
 autocmd InsertLeave * set updatetime=100
 
 hi FloatBorder guifg=#81a1c1
