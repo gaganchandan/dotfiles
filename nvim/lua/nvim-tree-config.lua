@@ -2,6 +2,7 @@ require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
     adaptive_size = false,
+    width = 29,
     mappings = {
         list = {
     { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },

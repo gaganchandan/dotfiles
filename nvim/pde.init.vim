@@ -120,7 +120,7 @@ set noruler
 set fillchars=eob:\ 
 set cursorline
 hi CursorLine guibg=#373e4d
-hi CursorLineNR guibg=#373e4d
+"hi CursorLineNR guibg=#373e4d
 
 " Better command line completion 
 set wildmenu
