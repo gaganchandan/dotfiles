@@ -5,7 +5,7 @@ require('lualine').setup {
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
-      statusline = {'NvimTree'},
+      statusline = {},
       winbar = {},
     },
     ignore_focus = {},
@@ -36,5 +36,5 @@ require('lualine').setup {
   tabline = {},
   winbar = {},
   inactive_winbar = {},
-  extensions = {}
+  extensions = {'nvim-tree'}
 }

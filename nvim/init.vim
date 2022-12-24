@@ -14,6 +14,7 @@ Plug 'navarasu/onedark.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 's3rvac/vim-syntax-retdecdsm'
 "*****************************************************************************
 "" Custom bundles - common
 "*****************************************************************************

@@ -39,7 +39,7 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'VonHeikemen/lsp-zero.nvim'
 Plug 'onsails/lspkind.nvim'
 Plug 'kana/vim-textobj-user'
-Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
+Plug 'github/copilot.vim'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
