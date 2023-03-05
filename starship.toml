@@ -2,6 +2,7 @@ format = """
 $username\
 $hostname\
 $directory\
+$python\
 $line_break\
 $character\
 $cmd_duration\
@@ -37,5 +38,8 @@ error_symbol = "[ ❯](#707070)"
 
 [cmd_duration]
 disabled = true
-
 add_newline = false
+
+[python]
+format = '(\($virtualenv\))'
+style = "blue"

@@ -11,16 +11,10 @@ Plug 'tpope/vim-surround'
 Plug 'arcticicestudio/nord-vim'
 Plug 'shaunsingh/nord.nvim'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'nvim-tree/nvim-tree.lua'
 Plug 'navarasu/onedark.nvim'
 Plug 'folke/tokyonight.nvim'
-Plug 'akinsho/bufferline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'preservim/tagbar'
-Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'goolord/alpha-nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'junegunn/limelight.vim'
 Plug 'sbdchd/neoformat'
@@ -49,7 +43,6 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'neovimhaskell/nvim-hs.vim'
 
 " Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'godlygeek/tabular'
 Plug 'elzr/vim-json'
 
@@ -264,33 +257,6 @@ autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2 expandtab
 " Keymaps
 nnoremap <silent>    <C-n> <Cmd>enew<CR>
 
-" BufferLine
-nnoremap <silent>    <C-A-Left> <Cmd>BufferLineCyclePrev<CR>
-nnoremap <silent>    <C-A-Right> <Cmd>BufferLineCycleNext<CR>
-nnoremap <silent>    <C-S-A-Left> <Cmd>BufferLineMovePrev<CR>
-nnoremap <silent>    <C-S-A-Right> <Cmd>BufferLineMoveNext<CR>
-nnoremap <silent>    <C-x> <Cmd>:call Quit()<CR>
-
-lua require("bufferline-config")
-
-" alpha-nvim
-command NewFile :enew | set showtabline=2 | set laststatus=2 | NvimTreeFocus | execute "normal \<C-W>\<C-W>"
-command FileBrowser :enew | NvimTreeFocus | execute "normal \<C-W>\<C-W>" |  set showtabline=2 | set laststatus=2 | Telescope file_browser 
-lua  require('alpha').setup(require'dashboard-config'.config)
-autocmd User AlphaReady set laststatus=0 
-autocmd User AlphaReady set showtabline=0 
-
-" let g:indentLine_fileTypeExclude = ['dashboard']
-" lua require('dashboard-config')
-" hi DashboardHeader guifg=#5e81ac
-" hi DashboardCenter guifg=#d8dee9 
-" hi DashboardFooter guifg=#8fbcbb 
-
-" telescope
-lua require('telescope-config')
-lua require("telescope").load_extension "file_browser"
-nnoremap <silent>    <C-b> <Cmd>Telescope file_browser<CR>
-
 " Use escape to leave terminal
 tnoremap <Esc> <C-\><C-n>
 
@@ -311,7 +277,7 @@ nnoremap <silent>    <C-s> <Cmd>12sp<CR>
 tnoremap <expr> <C-v> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 " lualine
-lua require('lualine-config')
+lua require('lualine-term-config')
 
 " Move to and from windows
 nnoremap <C-Up> <C-W><Up>
@@ -360,35 +326,14 @@ cnoreabbrev Qa qa
 cnoreabbrev q Q
 cnoreabbrev Q! Q
 
-autocmd FileType NvimTree nnoremap <buffer> ; <Esc>
-autocmd FileType NvimTree nnoremap <buffer> : <Esc>
-autocmd FileType NvimTree nnoremap <buffer> <C-c> <Esc>
-autocmd FileType NvimTree nnoremap <buffer> <C-t> <C-w><Right><Cmd>T<CR>
-autocmd FileType NvimTree nnoremap <buffer> <C-n> <C-w><Right><Cmd>enew<CR>
-autocmd FileType NvimTree nnoremap <buffer> <C-s> <C-w><Right><Cmd>12sp<CR>
-autocmd FileType NvimTree nnoremap <buffer> <C-x> <Esc>
-autocmd FileType NvimTree nnoremap <buffer> <C-d> <Esc>
-autocmd FileType NvimTree nnoremap <buffer> <C-f> <Esc>
-
-command! BufClose :bn|:bd!#
 nnoremap <silent> <C-d> <Cmd>BufClose<CR>
 
 nnoremap <silent> <C-f> <Cmd>vsp<CR>
 
-set guifont=JetBrains\ Mono\ Nerd\ Font:h8.5
 
 " Isabelle
 au BufRead,BufNewFile *.thy setfiletype isabelle
 au BufRead,BufNewFile *.thy set conceallevel=2
-
-" NvimTree
-lua require('nvim-tree-config')
-hi NvimTreeWinSeparator guibg=#282e38 guifg=#282e38
-hi NvimTreeNormal guibg=#282e38
-hi NvimTreeRootFolder guifg=#81a1c1
-hi NvimTreeWindowPicker guibg=#3b4252
-au FileType NvimTree lua vim.api.nvim_buf_set_keymap(0, 'n', '<C-d>', ':cd', {})
-nnoremap <C-A-t> <Cmd>NvimTreeToggle<CR>
 
 " Neoformat
 augroup fmt
