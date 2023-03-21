@@ -3,7 +3,18 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 lsp.setup()
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+local nvim_lsp = require('lspconfig')
+
+nvim_lsp.hls.setup({
+      on_attach = on_attach,
+      settings = {
+          haskell = {
+              hlintOn = true,
+          }
+       }
+  })
+
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
     underline = true,

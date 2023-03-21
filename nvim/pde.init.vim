@@ -40,6 +40,7 @@ Plug 'VonHeikemen/lsp-zero.nvim'
 Plug 'onsails/lspkind.nvim'
 Plug 'kana/vim-textobj-user'
 Plug 'github/copilot.vim'
+Plug 'mfussenegger/nvim-lint'
 
 "*****************************************************************************
 "" Custom bundles
@@ -446,3 +447,6 @@ autocmd BufReadPost *.v CoqStart | NvimTreeClose
 
 " Cornelis
 au BufWritePost *.agda execute "normal! :CornelisLoad\<CR>"
+
+" nvim-lint
+lua require ("nvim-lint")
