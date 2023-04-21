@@ -7,6 +7,7 @@ local nvim_lsp = require('lspconfig')
 
 nvim_lsp.hls.setup({
       on_attach = on_attach,
+      root_dir = vim.loop.cwd,
       settings = {
           haskell = {
               hlintOn = true,

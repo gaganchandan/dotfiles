@@ -15,12 +15,17 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 's3rvac/vim-syntax-retdecdsm'
+Plug 'kana/vim-textobj-user'
+Plug 'neovimhaskell/nvim-hs.vim'
 "*****************************************************************************
 "" Custom bundles - common
 "*****************************************************************************
 " haskell
 Plug 'neovimhaskell/haskell-vim'
 
+" Agda
+" Plug 'isovector/cornelis'
+Plug 'derekelkins/agda-vim'
 "*****************************************************************************
 "*****************************************************************************
 call plug#end()
@@ -289,3 +294,6 @@ set updatetime=300
 
 "Nvim autopairs
 lua require('nvim-autopairs').setup()
+
+" Cornelis
+" au BufWritePost *.agda execute "normal! :CornelisLoad\<CR>"

@@ -62,7 +62,8 @@ Plug 'vim-scripts/coq-syntax'
 Plug 'wlangstroth/vim-racket'
 
 " Agda
-Plug 'isovector/cornelis'
+" Plug 'isovector/cornelis'
+Plug 'derekelkins/agda-vim'
 
 " IPython
 Plug 'bfredl/nvim-ipy'
@@ -427,7 +428,7 @@ highlight! CmpItemAbbrMatch guibg=NONE guifg=#a1c7ed
 "***********************************************************************
 "***********************************************************************
 
-let $PATH="/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bin:/home/gagan/.local/bin:/home/gagan/.ghcup/ghc/9.4.2/bin/:/home/gagan/.ghcup/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/home/gagan/.cabal/bin/"
+let $PATH="/home/gagan/.ghcup/bin/:/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bin:/home/gagan/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin/"
 
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 
@@ -446,7 +447,7 @@ autocmd FileType coq nnoremap <C-t> <Cmd>CoqToTop<CR>
 autocmd BufReadPost *.v CoqStart | NvimTreeClose
 
 " Cornelis
-au BufWritePost *.agda execute "normal! :CornelisLoad\<CR>"
+" au BufWritePost *.agda execute "normal! :CornelisLoad\<CR>"
 
 " nvim-lint
 lua require ("nvim-lint")
