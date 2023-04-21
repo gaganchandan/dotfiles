@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Staying awake..."
+caffeinate cat 1>/dev/null
