@@ -41,6 +41,7 @@ Plug 'onsails/lspkind.nvim'
 Plug 'kana/vim-textobj-user'
 Plug 'github/copilot.vim'
 Plug 'mfussenegger/nvim-lint'
+Plug 'letieu/hacker.nvim'
 
 "*****************************************************************************
 "" Custom bundles
@@ -451,3 +452,12 @@ autocmd BufReadPost *.v CoqStart | NvimTreeClose
 
 " nvim-lint
 lua require ("nvim-lint")
+
+" Java
+" autocmd FileType java InsertEnter LspStop
+" autocmd FileType java InsertLeave LspStart
+
+lua require("hacker").setup()
+
+" goto-lang 
+au BufRead,BufNewFile *.goto setfiletype goto

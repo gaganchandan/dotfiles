@@ -1,31 +1,69 @@
 call plug#begin(expand('~/.config/nvim/plugged'))
+
 "*****************************************************************************
 "" General Plugins
 "*****************************************************************************
 Plug 'tpope/vim-commentary'
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'windwp/nvim-autopairs'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'arcticicestudio/nord-vim'
 Plug 'shaunsingh/nord.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'navarasu/onedark.nvim'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'nvim-lua/plenary.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 's3rvac/vim-syntax-retdecdsm'
+Plug 'preservim/tagbar'
+Plug 'nvim-lua/popup.nvim'
+Plug 'junegunn/limelight.vim'
+Plug 'sbdchd/neoformat'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'VonHeikemen/lsp-zero.nvim'
+Plug 'onsails/lspkind.nvim'
 Plug 'kana/vim-textobj-user'
-Plug 'neovimhaskell/nvim-hs.vim'
+Plug 'github/copilot.vim'
+Plug 'mfussenegger/nvim-lint'
+Plug 'joom/latex-unicoder.vim'
+Plug 'folke/noice.nvim'
+Plug 'MunifTanjim/nui.nvim'
+
 "*****************************************************************************
-"" Custom bundles - common
+"" Custom bundles
 "*****************************************************************************
 " haskell
 Plug 'neovimhaskell/haskell-vim'
+Plug 'neovimhaskell/nvim-hs.vim'
+
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'godlygeek/tabular'
+Plug 'elzr/vim-json'
+
+" Coq
+Plug 'whonore/Coqtail'
+Plug 'vim-scripts/coq-syntax'
+
+" Racket 
+Plug 'benknoble/vim-racket'
 
 " Agda
-" Plug 'isovector/cornelis'
 Plug 'derekelkins/agda-vim'
+Plug 'isovector/cornelis', { 'do': 'stack build' }
+
+" IPython
+Plug 'bfredl/nvim-ipy'
 "*****************************************************************************
 "*****************************************************************************
 call plug#end()
@@ -74,20 +112,19 @@ endif
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
+colorscheme nord
+
+set splitbelow
+set termguicolors
 syntax on
 set number
 let no_buffers_menu=1
 set colorcolumn=0
-set termguicolors
 set noruler
 set fillchars=eob:\ 
-hi Normal ctermbg=NONE guibg=NONE
-
-" Nord
-let g:nord_contrast=v:true
-let g:nord_borders=v:true
-let g:nord_cursorline_transparent=v:true
-colorscheme nord
+set cursorline
+hi CursorLine guibg=#373e4d
+" hi CursorLineNR guibg=#373e4d
 
 " Better command line completion 
 set wildmenu
@@ -109,6 +146,8 @@ let g:indentLine_faster = 1
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
 
+highlight! Terminal guibg=#21252e
+au TermEnter * setlocal winhighlight=Normal:Terminal
 au TermEnter * setlocal scrolloff=0
 au TermLeave * setlocal scrolloff=3
 
@@ -119,27 +158,8 @@ set laststatus=2
 set modeline
 set modelines=10
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
 nnoremap n nzzzv
 nnoremap N Nzzzv
-
-"*****************************************************************************
-"" Abbreviations
-"*****************************************************************************
-"" no one is really happy until you have this shortcuts
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Qa! qa!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
-cnoreabbrev Qa qa
 
 "*****************************************************************************
 "" Commands
@@ -182,9 +202,13 @@ if has('autocmd')
 endif
 
 "" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
+set clipboard=unnamedplus
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+nnoremap <C-v> a<C-r>+<Esc>
+inoremap <C-v> <C-r>+
+cnoremap <C-v> <C-r>+
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
@@ -214,9 +238,6 @@ augroup vimrc-python
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
-" vim-airline
-let g:airline#extensions#virtualenv#enabled = 1
-
 " Syntax highlight
 let python_highlight_all = 1
 
@@ -238,45 +259,13 @@ let g:coqtail_coq_prog = "coqidetop.opt"
 "*****************************************************************************
 nnoremap ; :
 vnoremap ; :
-let g:asyncomplete_auto_completeopt = 0
-set completeopt=menu
 autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2 expandtab
 
-
-vnoremap <S-C-c> "+y
-nmap <c-v> "+p
-inoremap <c-v> <c-r>+
-cnoremap <c-v> <c-r>+
-"use <c-r> to insert original character without triggering things like auto-pairs
-inoremap <c-r> <c-v>
-
-" Use escape to leave terminal
-tnoremap <Esc> <C-\><C-n>
-
-set splitbelow
-
-"Terminal
-function! TerminalSettings()
-    setlocal nonumber
-    normal a
-endfunction
-augroup terminal
-    autocmd!
-    autocmd TermOpen * call TerminalSettings()
-augroup END
-command! -nargs=* T 12sp | terminal <args>
-nnoremap <silent>    <C-t> <Cmd>T<CR>
-nnoremap <silent>    <C-s> <Cmd>12sp<CR>
-tnoremap <expr> <C-v> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+" Keymaps
+nnoremap <silent>    <C-n> <Cmd>enew<CR>
 
 " lualine
 lua require('lualine-term-config')
-
-" i3 syntax highlighting
-aug i3config_ft_detection
-  au!
-  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
-aug end
 
 " Making life easier
 inoremap <C-z> <Esc>
@@ -284,16 +273,87 @@ tnoremap <C-z> <C-\><C-n>
 vnoremap <C-z> <Esc>
 cnoremap <C-z> <C-C>
 nnoremap <C-z> <Esc>
+snoremap <C-z> <Esc>
+nnoremap <silent>    <C-x> <Cmd>:q!<CR>
 nnoremap a i
+cnoreabbrev W! w!
+cnoreabbrev Qall! qall!
+cnoreabbrev Qa! qa!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Qall qall
+cnoreabbrev Qa qa
+cnoreabbrev q q
+cnoreabbrev Q! q!
+" Move to and from windows
+nnoremap <C-Up> <C-W><Up>
+nnoremap <C-Down> <C-W><Down>
 
 " Isabelle
 au BufRead,BufNewFile *.thy setfiletype isabelle
 au BufRead,BufNewFile *.thy set conceallevel=2
 
-set updatetime=300
+" Neoformat
+augroup fmt
+      autocmd!
+      autocmd BufWritePre * undojoin | Neoformat
+augroup END
+let g:neoformat_ocaml_ocamlformat = {
+                \ 'exe': 'ocamlformat',
+            \ 'no_append': 1,
+            \ 'stdin': 1,
+            \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-']
+            \ }
+let g:neoformat_enabled_ocaml = ['ocamlformat']
 
-"Nvim autopairs
-lua require('nvim-autopairs').setup()
+""**********************************************************************
+" LSP and related config
+"***********************************************************************
+hi Border guifg=#81a1c1 guibg=#2e3440
+hi Pmenu guibg=#2e3440
 
-" Cornelis
-" au BufWritePost *.agda execute "normal! :CornelisLoad\<CR>"
+lua require('lsp')
+
+set updatetime=100
+autocmd InsertEnter * set updatetime=4000
+autocmd InsertLeave * set updatetime=100
+
+hi FloatBorder guifg=#81a1c1
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#a1c7ed
+"***********************************************************************
+"***********************************************************************
+
+let $PATH="/home/gagan/.ghcup/bin/:/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bin:/home/gagan/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin/"
+
+autocmd BufRead,BufNewFile * setlocal signcolumn=yes
+
+" nvim-autopairs
+lua require('nvim-autopairs-config')
+
+" Coqtail
+hi def CoqtailChecked guibg=#4c566a
+hi def CoqtailSent guibg=#4c566a
+
+" Coq
+autocmd FileType coq nnoremap <C-n> <Cmd>CoqNext<CR>
+autocmd FileType coq nnoremap <C-u> <Cmd>CoqUndo<CR>
+autocmd FileType coq nnoremap <C-l> <Cmd>CoqToLine<CR>
+autocmd FileType coq nnoremap <C-t> <Cmd>CoqToTop<CR>
+autocmd BufReadPost *.v CoqStart
+
+" nvim-lint
+lua require ("nvim-lint")
+
+" goto-lang 
+au BufRead,BufNewFile *.goto setfiletype goto
+au BufRead,BufNewFile *.pkt setfiletype pocket
+
+" noice.nvim 
+" autocmd FileType agda lua require ("noice").setup()
+
+" Agda
+au BufWritePost *.agda execute "normal! :CornelisLoad\<CR>"
+autocmd FileType agda setlocal shiftwidth=2 softtabstop=2 expandtab
