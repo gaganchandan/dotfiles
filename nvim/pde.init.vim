@@ -378,7 +378,7 @@ nnoremap <silent> <C-d> <Cmd>BufClose<CR>
 
 nnoremap <silent> <C-f> <Cmd>vsp<CR>
 
-set guifont=JetBrains\ Mono\ Nerd\ Font:h8.5
+set guifont=JetBrainsMono\ Nerd\ Font:h8.5
 
 " Isabelle
 au BufRead,BufNewFile *.thy setfiletype isabelle

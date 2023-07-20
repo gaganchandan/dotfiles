@@ -194,9 +194,20 @@ bindsym $mod+Shift+w exec --no-startup-id /opt/nvim.sh
 # Enable picom
 exec --no-startup-id picom -b
 
-# Remove titlebars
+# Remove window borders
 for_window [class=".*"] border pixel 0
+
+# Window borders
+# for_window [class=".*"] border pixel 4
+# # class                 border  backgr. text    indicator child_border
+# client.focused          #81a1c1 #81a1c1 #81a1c1 #81a1c1   #81a1c1
+# client.focused_inactive #81a1c1 #81a1c1 #81a1c1 #81a1c1   #81a1c1 
+# client.unfocused        #81a1c1 #81a1c1 #81a1c1 #81a1c1   #81a1c1
+# client.urgent           #81a1c1 #81a1c1 #81a1c1 #81a1c1   #81a1c1
+# client.placeholder      #81a1c1 #81a1c1 #81a1c1 #81a1c1   #81a1c1
+
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
+
 # Gaps
 gaps outer -2
 gaps inner 5

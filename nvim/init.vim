@@ -36,8 +36,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'github/copilot.vim'
 Plug 'mfussenegger/nvim-lint'
 Plug 'joom/latex-unicoder.vim'
-Plug 'folke/noice.nvim'
-Plug 'MunifTanjim/nui.nvim'
 
 "*****************************************************************************
 "" Custom bundles
@@ -219,8 +217,8 @@ vmap > >gv
 "*****************************************************************************
 
 " c
-autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType c setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType cpp setlocal tabstop=2 shiftwidth=2 expandtab
 
 
 " haskell
@@ -347,12 +345,9 @@ autocmd BufReadPost *.v CoqStart
 " nvim-lint
 lua require ("nvim-lint")
 
-" goto-lang 
+" Custom languages
 au BufRead,BufNewFile *.goto setfiletype goto
 au BufRead,BufNewFile *.pkt setfiletype pocket
-
-" noice.nvim 
-" autocmd FileType agda lua require ("noice").setup()
 
 " Agda
 au BufWritePost *.agda execute "normal! :CornelisLoad\<CR>"
