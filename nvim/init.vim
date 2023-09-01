@@ -62,6 +62,16 @@ Plug 'isovector/cornelis', { 'do': 'stack build' }
 
 " IPython
 Plug 'bfredl/nvim-ipy'
+
+" Prolog 
+Plug 'adimit/prolog.vim'
+
+" Verilog
+Plug 'vhda/verilog_systemverilog.vim'
+
+" LaTeX
+Plug 'lervag/vimtex'
+
 "*****************************************************************************
 "*****************************************************************************
 call plug#end()
@@ -236,6 +246,9 @@ augroup vimrc-python
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
+" html
+autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab
+
 " Syntax highlight
 let python_highlight_all = 1
 
@@ -251,6 +264,16 @@ let g:vim_markdown_json_frontmatter = 1
 "coq
 let g:coqtail_coq_path = "/usr/bin/"
 let g:coqtail_coq_prog = "coqidetop.opt"
+
+" verilog 
+autocmd FileType verilog_systemverilog setlocal tabstop=2 shiftwidth=2 expandtab
+
+" LaTeX 
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
 "*****************************************************************************
 ""User defined
@@ -306,7 +329,8 @@ let g:neoformat_ocaml_ocamlformat = {
             \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-']
             \ }
 let g:neoformat_enabled_ocaml = ['ocamlformat']
-
+let g:neoformat_haskell_ormolu = { 'exe': 'ormolu', 'args': [] }
+let g:neoformat_enabled_haskell = ['ormolu']
 ""**********************************************************************
 " LSP and related config
 "***********************************************************************
@@ -324,7 +348,7 @@ highlight! CmpItemAbbrMatch guibg=NONE guifg=#a1c7ed
 "***********************************************************************
 "***********************************************************************
 
-let $PATH="/home/gagan/.ghcup/bin/:/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bin:/home/gagan/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin/"
+let $PATH="/home/gagan/.ghcup/bin/:/home/gagan/.cabal/bin/:/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bin:/home/gagan/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin/"
 
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 
