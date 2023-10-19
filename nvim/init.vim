@@ -73,6 +73,18 @@ Plug 'vhda/verilog_systemverilog.vim'
 Plug 'lervag/vimtex'
 
 "*****************************************************************************
+"" Additional colorschemes
+"*****************************************************************************
+Plug 'sainnhe/sonokai'
+Plug 'joshdick/onedark.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'folke/tokyonight.nvim'
+Plug 'morhetz/gruvbox'
+Plug 'tomasr/molokai'
+Plug 'tomasiser/vim-code-dark'
+
+"*****************************************************************************
 "*****************************************************************************
 call plug#end()
 
@@ -275,6 +287,9 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
+" Jupyter
+Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
+
 "*****************************************************************************
 ""User defined
 "*****************************************************************************
@@ -330,7 +345,10 @@ let g:neoformat_ocaml_ocamlformat = {
             \ }
 let g:neoformat_enabled_ocaml = ['ocamlformat']
 let g:neoformat_haskell_ormolu = { 'exe': 'ormolu', 'args': [] }
+let g:neoformat_haskell_fourmolu = { 'exe': 'fourmolu', 'args': [] }
 let g:neoformat_enabled_haskell = ['ormolu']
+" let g:neoformat_enabled_haskell = ['fourmolu']
+
 ""**********************************************************************
 " LSP and related config
 "***********************************************************************
@@ -358,8 +376,6 @@ lua require('nvim-autopairs-config')
 " Coqtail
 hi def CoqtailChecked guibg=#4c566a
 hi def CoqtailSent guibg=#4c566a
-
-" Coq
 autocmd FileType coq nnoremap <C-n> <Cmd>CoqNext<CR>
 autocmd FileType coq nnoremap <C-u> <Cmd>CoqUndo<CR>
 autocmd FileType coq nnoremap <C-l> <Cmd>CoqToLine<CR>
@@ -369,10 +385,27 @@ autocmd BufReadPost *.v CoqStart
 " nvim-lint
 lua require ("nvim-lint")
 
-" Custom languages
+" My languages
 au BufRead,BufNewFile *.goto setfiletype goto
 au BufRead,BufNewFile *.pkt setfiletype pocket
 
-" Agda
+" swarm 
+au BufRead,BufNewFile *.sw setfiletype swarm
+
+" Cornelis and Agda
 au BufWritePost *.agda execute "normal! :CornelisLoad\<CR>"
 autocmd FileType agda setlocal shiftwidth=2 softtabstop=2 expandtab
+
+" Magma 
+let g:magma_automatically_open_output = v:false
+let g:magma_image_provider = "ueberzug"
+
+function MagmaInitPython()
+    vim.cmd[[
+    :MagmaInit python3
+    :MagmaEvaluateArgument a=5
+    ]]
+endfunction
+
+" CodeLens 
+" autocmd InsertLeave,CursorHold *.ml,*.mli :lua vim.lsp.codelens.refresh()

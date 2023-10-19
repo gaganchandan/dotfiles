@@ -5,18 +5,8 @@ lsp.setup()
 
 local nvim_lsp = require('lspconfig')
 
-nvim_lsp.hls.setup({
-      on_attach = on_attach,
-      root_dir = vim.loop.cwd,
-      settings = {
-          haskell = {
-              hlintOn = true,
-          }
-       }
-  })
-
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
     underline = true,
     signs = true,
@@ -85,5 +75,37 @@ vim.api.nvim_set_keymap('n', 'rn', '<cmd>lua Rename.rename()<CR>', {silent = tru
 vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap("i", "<C-A>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
-require'lspconfig'.ocamllsp.setup{}
+-- CodeLens for OCaml and Haskell
 
+local on_attach_enable_codelens = function(client)
+  client.server_capabilities.code_lens = true
+  vim.cmd [[
+    augroup lsp_codelens
+      autocmd!
+      autocmd CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+    augroup END
+  ]]
+  vim.cmd [[ lua vim.lsp.codelens.refresh() ]]
+  return on_attach(client)
+end
+
+-- Haskell
+nvim_lsp.hls.setup({
+      on_attach = on_attach_enable_codelens,
+      root_dir = vim.loop.cwd,
+      settings = {
+          haskell = {
+              hlintOn = true,
+          }
+       }
+  })
+
+-- OCaml 
+nvim_lsp.ocamllsp.setup({
+    cmd = { "ocamllsp" },
+    filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+    root_dir = nvim_lsp.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
+    on_attach = on_attach_enable_codelens,
+})
+
+-- require'lspconfig'.ocamllsp.setup{}
