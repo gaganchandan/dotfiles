@@ -1,0 +1,10 @@
+du-dust v0.8.5:
+    dust
+fd-find v8.4.0:
+    fd
+ripgrep v13.0.0:
+    rg
+rusty-rain v0.3.6:
+    rusty-rain
+tokei v12.1.2:
+    tokei
