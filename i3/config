@@ -206,7 +206,8 @@ for_window [class=".*"] border pixel 0
 # client.urgent           #81a1c1 #81a1c1 #81a1c1 #81a1c1   #81a1c1
 # client.placeholder      #81a1c1 #81a1c1 #81a1c1 #81a1c1   #81a1c1
 
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
+# bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
+bindsym Print exec --no-startup-id maim "/home/gagan/ISFCR/MTech/Crypto/$(date).png"
 
 # Gaps
 gaps outer -2
@@ -215,6 +216,9 @@ smart_gaps off
 
 # Apps in fullscreen
 for_window [class="evince"] fullscreen enable
+
+# Cloudflare Warp
+for_window [class="Cloudflare Warp"] floating enable
 
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh

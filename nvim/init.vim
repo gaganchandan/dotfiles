@@ -385,6 +385,10 @@ autocmd BufReadPost *.v CoqStart
 " nvim-lint
 lua require ("nvim-lint")
 
+" Prolog 
+let g:filetype_pl="prolog"
+autocmd BufNewFile,BufRead *.pl   set syntax=prolog
+
 " My languages
 au BufRead,BufNewFile *.goto setfiletype goto
 au BufRead,BufNewFile *.pkt setfiletype pocket
