@@ -207,11 +207,12 @@ for_window [class=".*"] border pixel 0
 # client.placeholder      #81a1c1 #81a1c1 #81a1c1 #81a1c1   #81a1c1
 
 # bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
-bindsym Print exec --no-startup-id maim "/home/gagan/ISFCR/MTech/Crypto/$(date).png"
+bindsym $mod+p exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
+# bindsym Print exec --no-startup-id maim "/home/gagan/ISFCR/MTech/Crypto/$(date).png"
 
 # Gaps
 gaps outer -2
-gaps inner 5
+gaps inner 12
 smart_gaps off
 
 # Apps in fullscreen
@@ -239,9 +240,15 @@ exec_always --no-startup-id rfkill unblock all
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
 
+# betterlockscreen
+exec --no-startup-id betterlockscreen -w dim
+
 # light-locker
 # exec --no-startup-id /opt/lightdm.py sleep
-exec_always --no-startup-id light-locker
+# exec_always --no-startup-id light-locker
+
+# xscreensaver
+# exec_always --no-startup-id xscreensaver -no-splash &
 
 # bashtop
 bindsym Control+Mod1+Delete exec --no-startup-id alacritty -o font.size=9 -o font.normal.family="JetBrains Mono Nerd Font" -e bpytop

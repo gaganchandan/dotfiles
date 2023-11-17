@@ -99,7 +99,7 @@ case ${chosen} in
 		run_cmd --hibernate
         ;;
     $lock)
-		light-locker-command -l
+		betterlockscreen -l
         ;;
     $suspend)
 		run_cmd --suspend
