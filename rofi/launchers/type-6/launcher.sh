@@ -15,5 +15,6 @@ theme='style-9'
 
 ## Run
 rofi \
+    -disable-history \
     -show drun \
     -theme ${dir}/${theme}.rasi

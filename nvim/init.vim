@@ -72,6 +72,9 @@ Plug 'vhda/verilog_systemverilog.vim'
 " LaTeX
 Plug 'lervag/vimtex'
 
+" jsonc
+Plug 'neoclide/jsonc.vim'
+
 "*****************************************************************************
 "" Additional colorschemes
 "*****************************************************************************
@@ -347,6 +350,7 @@ let g:neoformat_enabled_ocaml = ['ocamlformat']
 let g:neoformat_haskell_ormolu = { 'exe': 'ormolu', 'args': [] }
 let g:neoformat_haskell_fourmolu = { 'exe': 'fourmolu', 'args': [] }
 let g:neoformat_enabled_haskell = ['ormolu']
+let g:neoformat_enabled_javascript = []
 " let g:neoformat_enabled_haskell = ['fourmolu']
 
 ""**********************************************************************
@@ -410,6 +414,9 @@ function MagmaInitPython()
     :MagmaEvaluateArgument a=5
     ]]
 endfunction
+
+" Waybar
+" au BufNewFile,BufRead,BufReadPost config set syntax=jsonc
 
 " CodeLens 
 " autocmd InsertLeave,CursorHold *.ml,*.mli :lua vim.lsp.codelens.refresh()
