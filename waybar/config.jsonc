@@ -1,0 +1,232 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 30,
+    "modules-left": ["custom/launcher", "hyprland/workspaces", "custom/firefox", 
+        "custom/terminal", "custom/file-manager", "custom/spotify", "cpu", "memory"],
+    //"modules-left": ["clock","hyprland/window"],
+    "modules-center": ["clock", "custom/spotify-logo", 
+        "custom/spotify-title", "custom/spotify-time", "custom/spotify-artist", 
+        "custom/spotify-prev", "custom/spotify-playpause", "custom/spotify-next"],
+    "modules-right": ["backlight", "pulseaudio", "network", "bluetooth", "battery", "custom/notification"],
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate"
+    },
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10
+    },
+    "clock": {
+        // "format": "{: %I:%M %p   %a, %b %e}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-",
+        "min-length": 6
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        // "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": " Muted",
+        "on-click": "pamixer -t",
+        "on-scroll-up": "pamixer -i 1",
+        "on-scroll-down": "pamixer -d 1",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "Mic: {volume}%",
+        "format-source-muted": "Mic: Muted",
+        "on-click": "pamixer --default-source -t",
+        "on-scroll-up": "pamixer --default-source -i 1",
+        "on-scroll-down": "pamixer --default-source -d 1",
+        "scroll-step": 5
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "  {essid}",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        // "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}",
+        "on-click": "iwgtk"
+    },
+    "bluetooth": {
+	    "format": " {status}",
+	    "format-disabled": "", // an empty format will hide the module
+	    "format-connected": " {device_alias}",
+	    "tooltip-format": "{device_alias}",
+	    "tooltip-format-connected": " {device_enumerate}",
+	    "tooltip-format-enumerate-connected": "{device_alias}",
+        "tooltip": false,
+        "on-click": "blueman-manager"
+    },
+    "custom/terminal": {
+        "format": "",
+        "on-click": "alacritty &",
+        "tooltip": false
+    },
+    "custom/firefox": {
+        "format": "",
+        "on-click": "firefox &",
+        "tooltip": false
+    },
+    "custom/file-manager": {
+        "format": " ",
+        "on-click": "thunar &",
+        "tooltip": false
+    },
+    "custom/spotify": {
+        "format": "󰓇",
+        "on-click": "spotify &",
+        "tooltip": false
+    },
+    "custom/powermenu": {
+        "format": "",
+        "on-click": "/home/gagan/.config/rofi/powermenu/type-5/powermenu.sh &"
+    },
+    "cpu": {
+        "format": "CPU: {usage}%",
+        "tooltip": false,
+        "on-click": "alacritty -e bpytop"
+    },
+    "memory": {
+    "interval": 5,
+    "format": "Memory: {used:0.1f}G/{total:0.1f}G",
+    "on-click": "alacritty -e bpytop",
+    "tooltip": false
+    },
+  "custom/spotify-logo": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/spotify-logo-script.sh",
+    "exec-if": "pgrep spotify",
+    "interval": 1,
+    "tooltip": false
+  },
+  "custom/spotify-title": {
+    "format": "{}",
+    "max-length": 30,
+    "exec": "$HOME/.config/waybar/spotify-title-script.sh",
+    "exec-if": "pgrep spotify",
+    "interval": 1,
+    "tooltip": false
+  },
+  "custom/spotify-time": {
+    "format": "{}",
+    "max-length": 10,
+    "exec": "$HOME/.config/waybar/spotify-time-script.sh",
+    "exec-if": "pgrep spotify",
+    "interval": 1,
+    "tooltip": false
+  },
+  "custom/spotify-playpause": {
+    "format": " {} ",
+    "on-click": "playerctl --player=spotify play-pause",
+    "exec": "$HOME/.config/waybar/spotify-playpause-script.sh",
+    "exec-if" : "pgrep spotify",
+    "interval": 1,
+    "tooltip": false
+  },
+  "custom/spotify-next": {
+    "format": "{}",
+    "on-click": "playerctl --player=spotify next",
+    "exec": "$HOME/.config/waybar/spotify-next-script.sh",
+    //"exec-if": "pgrep spotify",
+    "interval": 1,
+    "tooltip": false
+  },
+  "custom/spotify-prev": {
+    "format": "{}",
+    "on-click": "playerctl --player=spotify previous",
+    "exec": "$HOME/.config/waybar/spotify-prev-script.sh",
+    "exec-if": "pgrep spotify",
+    "interval": 1,
+    "tooltip": false
+  },
+  "custom/launcher":{
+    "format": "󰣇 ",
+    "on-click": "/home/gagan/.config/rofi/launchers/type-6/launcher.sh &",
+    "tooltip": false
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󰅸",
+      "none": "󰂜",
+      "dnd-notification": "󰪑",
+      "dnd-none": "󰪑",
+      "inhibited-notification": "󰅸",
+      "inhibited-none": "󰂜",
+      "dnd-inhibited-notification": "󰪑",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.2; swaync-client -t -sw",
+    "on-click-right": "sleep 0.2; swaync-client -d -sw",
+    "escape": true
+  },
+  "custom/spotify-not-playing": {
+      "format": "{}",
+      "on-click": "spotify &",
+      "exec-if": "! pgrep spotify",
+      "exec": "$HOME/.config/waybar/spotify-not-playing.sh",
+      "interval": 1,
+      "tooltip": false
+  },
+  "cava": {
+    "framerate": 30,
+    "autosens": 1,
+    "sensitivity": 100,
+    "bars": 14,
+    "lower_cutoff_freq": 50,
+    "higher_cutoff_freq": 10000,
+    "method": "pulse",
+    "source": "auto",
+    "stereo": true,
+    "reverse": false,
+    "bar_delimiter": 0,
+    "monstercat": false,
+    "waves": false,
+    "noise_reduction": 0.77,
+    "input_delay": 2,
+    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+    "actions": {
+               "on-click-right": "mode"
+               }
+    }
+}

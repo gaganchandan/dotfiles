@@ -1,0 +1,277 @@
+* {
+    border: none;
+    border-radius: 0px;
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: bold;
+    font-size: 14px;
+    min-height: 0;
+    transition: 0.3s;
+}
+
+window#waybar {
+    background: transparent;
+    color: #cdd6f4;
+}
+
+tooltip {
+    background: #202329;
+    border-radius: 10px;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: #181825;
+    transition: 0.3s;
+}
+
+#workspaces button {
+    padding: 2px;
+    color: #81a1c1;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+#workspaces button.active {
+    color: #81a1c1;
+    background: #2e3440;
+    border-radius: 20px;
+}
+
+#workspaces button.focused {
+    color: #a6adc8;
+    background: #eba0ac;
+    border-radius: 20px;
+}
+
+#workspaces button.urgent {
+    color: #11111b;
+    background: #a6e3a1;
+    border-radius: 20px;
+}
+
+#workspaces button:hover {
+    background: #11111b;
+    color: #cdd6f4;
+    border-radius: 20px;
+}
+
+#custom-power_profile,
+#custom-weather,
+#window,
+#clock,
+#battery,
+#backlight,
+#pulseaudio,
+#network,
+#bluetooth,
+#temperature,
+#workspaces,
+#tray,
+#backlight,
+#custom-firefox,
+#custom-terminal,
+#custom-file-manager,
+#custom-spotify,
+#custom-powermenu,
+#cpu,
+#memory,
+#custom-launcher,
+#custom-spotify-logo,
+#custom-spotify-title,
+#custom-spotify-prev,
+#custom-spotify-playpause,
+#custom-spotify-next,
+#custom-spotify-time,
+#custom-notification,
+#custom-spotify-not-playing
+{
+    background: #202329;
+    opacity: 0.8;
+    padding: 0px 10px;
+    margin: 0;
+    margin-top: 5px;
+    border: 1px solid #181825;
+    color: #81a1c1;
+}
+
+#temperature {
+    border-radius: 20px 0px 0px 20px;
+}
+
+#temperature.critical {
+    color: #eba0ac;
+}
+
+#backlight {
+    border-radius: 20px 0px 0px 20px;
+    padding-left: 7px;
+}
+
+#tray {
+    border-radius: 20px;
+    margin-right: 5px;
+    padding: 0px 4px;
+}
+
+#workspaces {
+    background: #202329;
+    border-radius: 20px;
+    margin-right: 5px;
+    padding-right: 0px;
+}
+
+#custom-power_profile {
+    color: #a6e3a1;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#window {
+    border-radius: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#clock {
+    border-radius: 20px 20px 20px 20px;
+    margin-right: 5px;
+}
+
+#custom-spotify-not-playing {
+    border-radius: 20px 20px 20px 20px;
+}
+
+#custom-spotify-logo {
+    border-right: 0px;
+    border-left: 0px;
+    border-radius: 20px 0px 0px 20px;
+    padding-right: 5px;
+}
+
+#custom-spotify-title {
+    border-right: 0px;
+    border-left: 0px;
+}
+
+#custom-spotify-prev {
+    border-right: 0px;
+    border-left: 0px;
+    font-size: 18px;
+}
+
+#custom-spotify-playpause {
+    border-right: 0px;
+    border-left: 0px;
+    font-size: 18px;
+}
+
+#custom-spotify-next {
+    border-radius: 0px 20px 20px 0px;
+    margin-right: 5px;
+    border-left: 0px;
+    font-size: 18px;
+}
+
+#network {
+    border-radius: 20px 0px 0px 20px;
+}
+
+#bluetooth {
+    border-radius: 0px 20px 20px 0px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-right: 5px;
+    /* border-left: 0px; */
+    /* border-right: 0px; */
+    /* border-radius: 20px; */
+    /* margin-right: 10px */
+} 
+
+#pulseaudio {
+    border-radius: 0px 20px 20px 0px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-right: 5px;
+}
+
+#pulseaudio.microphone {
+    border-left: 0px;
+    border-right: 0px;
+    margin-right: 5px;
+    padding-right: 8px;
+}
+
+#battery {
+    border-radius: 20px 0px 0px 20px;
+    /* margin-right: 5px; */
+}
+
+#battery.warning {
+    color: #ebcb8b;
+}
+
+#battery.critical {
+    color: #bf616a;
+}
+
+#custom-weather {
+    border-radius: 20px;
+    border-right: 0px;
+    margin-left: 0px;
+}
+
+#custom-firefox {
+    font-size: 15px;
+    border-radius: 20px 0px 0px 20px;
+    /* margin-right: 5px; */
+}
+#custom-terminal {
+    font-size: 18px;
+    border-left: 0px;
+}
+#custom-file-manager {
+    font-size: 18px;
+    border-left: 0px;
+}
+#custom-spotify {
+    font-size: 18px;
+    border-radius: 0px 20px 20px 0px;
+    padding-right: 15px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-right: 5px;
+}
+
+#custom-notification {
+    border-radius: 0px 20px 20px 0px;
+    border-left: 0px;
+    border-right: 0px;
+    font-size: 18px;
+    padding-right: 15px;
+    margin-right: 5px;
+} 
+
+#custom-powermenu {
+    border-radius: 0px 20px 20px 0px;
+    /* border-left: 0px; */
+    /* border-right: 0px; */
+    margin-right: 5px;
+}
+
+#cpu {
+    border-radius: 20px 0px 0px 20px;
+}
+
+#memory {
+    border-radius: 0px 20px 20px 0px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-right: 5px;
+}
+
+#custom-launcher {
+    border-radius: 20px 20px 20px 20px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 18px;
+}

@@ -1,0 +1,370 @@
+@define-color cc-bg #202329;
+@define-color noti-border-color rgba(255, 255, 255, 0.15);
+@define-color noti-bg rgb(24, 24, 37);
+@define-color noti-bg-darker #2e3440;
+@define-color noti-bg-hover rgb(27, 27, 43);
+@define-color noti-bg-focus rgba(27, 27, 27, 0.6);
+@define-color noti-close-bg rgba(255, 255, 255, 0.1);
+@define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
+@define-color text-color #81a1c1;
+@define-color text-color-disabled rgb(150, 150, 150);
+@define-color bg-selected rgb(0, 128, 255);
+
+* {
+  font-family: JetBrainsMono NFP;
+  font-weight: bold;
+}
+
+.control-center .notification-row:focus,
+.control-center .notification-row:hover {
+  box-shadow: none;
+  opacity: 1;
+  background: transparent;
+}
+
+.notification-row:focus .notification,
+.notification-row:hover .notification {
+  background: #111317;
+  box-shadow: none;
+}
+
+
+.notification-row {
+  box-shadow: none;
+  outline: none;
+  margin: 10px;
+  padding: 0;
+}
+
+.notification {
+  box-shadow: none;
+  background: #111317;
+  padding: 0;
+  margin: 0px;
+}
+
+.notification-content {
+  box-shadow: none;
+  background: #111317;
+  padding: 10px;
+  border-radius: 5px;
+  border: 5px solid #111317;
+  margin: 0;
+}
+
+.notification-default-action {
+  box-shadow: none;
+  background: #111317;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+}
+
+.close-button {
+  box-shadow: none;
+  background: #81a1c1;
+  color: @cc-bg;
+  text-shadow: none;
+  padding: 0;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.close-button:hover {
+  box-shadow: none;
+  background: #bf616a;
+  transition: all 0.15s ease-in-out;
+  border: none;
+}
+
+.notification-action {
+  box-shadow: none;
+  background: #111317;
+  border: 5px solid #111317;
+  border-top: none;
+  border-radius: 5px;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+  box-shadow: none;
+  color: #81a1c1;
+  background: #111317;
+}
+
+.notification-default-action {
+  box-shadow: none;
+  border-radius: 5px;
+  background: #111317;
+  margin: 0px;
+}
+
+
+
+.inline-reply {
+  box-shadow: none;
+  margin-top: 8px;
+}
+
+.inline-reply-entry {
+  background: @noti-bg-darker;
+  color: @text-color;
+  caret-color: @text-color;
+  border: 1px solid @noti-border-color;
+  border-radius: 5px;
+  box-shadow: none;
+}
+
+.inline-reply-button {
+  margin-left: 4px;
+  background: @noti-bg-darker;
+  border: 1px solid @noti-border-color;
+  border-radius: 5px;
+  color: @text-color;
+  box-shadow: none;
+}
+
+.inline-reply-button:disabled {
+  background: initial;
+  color: @text-color-disabled;
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+.inline-reply-button:hover {
+  background: @noti-bg-darker;
+  box-shadow: none;
+}
+
+.body-image {
+  margin-top: 6px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: none;
+}
+
+.summary {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: #81a1c1;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.time {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+  margin-right: 18px;
+  box-shadow: none;
+}
+
+.body {
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.control-center {
+  background: @cc-bg;
+  border: 5px solid #81a1c1;
+  border-radius: 5px;
+  box-shadow: none;
+}
+
+.control-center-list {
+  background: transparent;
+  box-shadow: none;
+}
+
+.control-center-list-placeholder {
+  opacity: 0.0;
+  box-shadow: none;
+}
+
+.floating-notifications {
+  background: transparent;
+  box-shadow: none;
+}
+
+.blank-window {
+  background: alpha(black, 0);
+}
+
+.widget-title {
+  color: #81a1c1;
+  background: @noti-bg-darker;
+  padding: 5px 10px;
+  margin: 10px 10px 5px 10px;
+  font-size: 1.5rem;
+  border-radius: 5px;
+}
+
+.widget-title > button {
+  font-size: 1rem;
+  color: @text-color;
+  text-shadow: none;
+  background: @cc-bg;
+  box-shadow: none;
+  border-radius: 5px;
+  border: 1px solid @cc-bg;
+}
+
+.widget-title > button:hover {
+  background: #81a1c1;
+  color: @cc-bg;
+  border: 1px solid #81a1c1;
+}
+
+.widget-dnd {
+  background: @noti-bg-darker;
+  padding: 5px 10px;
+  margin: 5px 10px 10px 10px;
+  border-radius: 5px;
+  font-size: large;
+  color: #81a1c1;
+}
+
+.widget-dnd > switch {
+  border-radius: 5px;
+  /* border: 1px solid #7aa2f7; */
+  background: #81a1c1;
+}
+
+.widget-dnd > switch:checked {
+  background: #bf616a;
+  border: 1px solid #bf616a;
+}
+
+.widget-dnd > switch slider {
+  background: @cc-bg;
+  border-radius: 5px;
+}
+
+.widget-dnd > switch:checked slider {
+  background: @cc-bg;
+  border-radius: 5px;
+}
+
+.widget-label {
+  margin: 10px 10px 5px 10px;
+}
+
+.widget-label > label {
+  font-size: 1rem;
+  color: @text-color;
+}
+
+.widget-mpris {
+  color: @text-color;
+  background: @noti-bg-darker;
+  padding: 5px 10px;
+  margin: 5px 10px 5px 10px;
+  border-radius: 5px;
+}
+
+.widget-mpris > box > button {
+  border-radius: 5px;
+}
+
+.widget-mpris-player {
+  padding: 5px 10px;
+  margin: 10px;
+}
+
+.widget-mpris-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.widget-mpris-subtitle {
+  font-size: 1.1rem;
+}
+
+.widget-buttons-grid {
+  font-size: 30px;
+  /* padding: 5px; */
+  margin: 10px 10px 10px 10px;
+  border-radius: 5px;
+  background: @noti-bg-darker;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  margin: 3px;
+  background: @cc-bg;
+  border-radius: 5px;
+  color: @text-color;
+  padding-right: 20px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: @text-color;
+  color: @cc-bg;
+}
+
+.widget-menubar > box > .menu-button-bar > button {
+  border: none;
+  background: transparent;
+}
+
+.topbar-buttons > button {
+  border: none;
+  background: transparent;
+}
+
+.widget-volume {
+  background: @noti-bg-darker;
+  padding: 5px;
+  margin: 10px 10px 5px 10px;
+  border-radius: 5px;
+  font-size: x-large;
+  color: @text-color;
+}
+
+.widget-volume > box > button {
+  background: #81a1c1;
+  border: none;
+}
+
+.per-app-volume {
+  background-color: @noti-bg;
+  padding: 4px 8px 8px;
+  margin: 0 8px 8px;
+  border-radius: 5px;
+}
+
+.widget-backlight {
+  background: @noti-bg-darker;
+  padding: 5px;
+  margin: 10px 10px 5px 10px;
+  border-radius: 5px;
+  font-size: x-large;
+  color: @text-color;
+}
+
+/* .widget-inhibitors {
+    margin: 8px;
+    font-size: 1.5rem
+}
+
+.widget-inhibitors>button {
+    font-size: initial;
+    color: @text-color;
+    text-shadow: none;
+    background: @noti-bg;
+    border: 1px solid red;
+    box-shadow: none;
+    border-radius: 7px
+}
+
+.widget-inhibitors>button:hover {
+    background: @noti-bg-hover
+} */
+
