@@ -36,6 +36,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'github/copilot.vim'
 Plug 'mfussenegger/nvim-lint'
 Plug 'joom/latex-unicoder.vim'
+Plug 'mjbrownie/hackertyper.vim'
 
 "*****************************************************************************
 "" Custom bundles
@@ -45,7 +46,7 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'neovimhaskell/nvim-hs.vim'
 
 " Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'godlygeek/tabular'
 Plug 'elzr/vim-json'
 
@@ -420,3 +421,6 @@ endfunction
 
 " CodeLens 
 " autocmd InsertLeave,CursorHold *.ml,*.mli :lua vim.lsp.codelens.refresh()
+
+" Snippets 
+lua require ("snippets")

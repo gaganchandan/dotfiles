@@ -74,6 +74,7 @@ vim.api.nvim_set_keymap('n', 'rn', '<cmd>lua Rename.rename()<CR>', {silent = tru
 -- Github Copilot
 vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap("i", "<C-A>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.g.copilot_filetypes = {markdown = true}
 
 -- CodeLens for OCaml and Haskell
 
