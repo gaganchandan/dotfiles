@@ -65,7 +65,11 @@
         },
         {
           "label": "󰌾",
-          "command": "swaylock-corrupter"
+          "command": "swaylock"
+        },
+        {
+          "label": "",
+          "command": "systemctl suspend"
         },
         {
           "label": "󰍃",

@@ -37,6 +37,7 @@ Plug 'github/copilot.vim'
 Plug 'mfussenegger/nvim-lint'
 Plug 'joom/latex-unicoder.vim'
 Plug 'mjbrownie/hackertyper.vim'
+Plug 'https://github.com/echasnovski/mini.nvim'
 
 "*****************************************************************************
 "" Custom bundles
@@ -75,6 +76,9 @@ Plug 'lervag/vimtex'
 
 " jsonc
 Plug 'neoclide/jsonc.vim'
+
+" Rust 
+" Plug 'https://github.com/mrcjkb/rustaceanvim'
 
 "*****************************************************************************
 "" Additional colorschemes

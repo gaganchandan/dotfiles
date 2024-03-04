@@ -18,8 +18,13 @@ tooltip {
     border-radius: 10px;
     border-width: 1.5px;
     border-style: solid;
-    border-color: #181825;
+    border-color: #81a1c1;
     transition: 0.3s;
+    /* color: #81a1c1; */
+}
+
+tooltip label {
+    color: #81a1c1;
 }
 
 #workspaces button {
@@ -42,14 +47,14 @@ tooltip {
 }
 
 #workspaces button.urgent {
-    color: #11111b;
-    background: #a6e3a1;
+    color: #111317;
+    background: #a3be8c;
     border-radius: 20px;
 }
 
 #workspaces button:hover {
-    background: #11111b;
-    color: #cdd6f4;
+    background: #111317;
+    color: #81a1c1;
     border-radius: 20px;
 }
 
@@ -246,7 +251,7 @@ tooltip {
     border-right: 0px;
     font-size: 18px;
     padding-right: 15px;
-    margin-right: 5px;
+    margin-right: 7px;
 } 
 
 #custom-powermenu {
@@ -272,6 +277,7 @@ tooltip {
     border-left: 0px;
     border-right: 0px;
     margin-right: 5px;
-    margin-left: 5px;
+    margin-left: 7px;
     font-size: 18px;
+    padding-right: 17px;
 }
