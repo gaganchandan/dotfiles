@@ -42,7 +42,7 @@ Plug 'https://github.com/echasnovski/mini.nvim'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
-" haskell
+" Haskell
 Plug 'neovimhaskell/haskell-vim'
 Plug 'neovimhaskell/nvim-hs.vim'
 
@@ -79,6 +79,9 @@ Plug 'neoclide/jsonc.vim'
 
 " Rust 
 " Plug 'https://github.com/mrcjkb/rustaceanvim'
+
+" Java 
+Plug 'mfussenegger/nvim-jdtls'
 
 "*****************************************************************************
 "" Additional colorschemes
@@ -428,3 +431,14 @@ endfunction
 
 " Snippets 
 lua require ("snippets")
+
+" Switch between relative and absolute line numbers
+function! NumberToggle()
+    if(&rnu == 1)
+        set rnu!
+    elseif(&rnu == 0)
+        set rnu
+    endif
+endfunction
+
+nnoremap <C-n> :call NumberToggle()<CR>
