@@ -7,7 +7,7 @@
     "gtk-layer-shell": true,
     "height": 30,
     "modules-left": ["custom/launcher", "hyprland/workspaces", "custom/firefox", 
-        "custom/terminal", "custom/file-manager", "custom/spotify", "cpu", "memory"],
+        "custom/terminal", "custom/file-manager", "custom/spotify", "custom/steam", "cpu", "memory"],
     //"modules-left": ["clock","hyprland/window"],
     "modules-center": ["clock", "custom/spotify-logo", 
         "custom/spotify-title", "custom/spotify-time", "custom/spotify-artist", 
@@ -24,7 +24,7 @@
     },
     "clock": {
         "format": " {:%I:%M %p}",
-        // "format": "{: %I:%M %p -  %a, %b%e}",
+        // "format": " {:%I:%M %p - %a, %b%e}",
         "tooltip-format": " {:%a, %b %e}"     
     },
     "backlight": {
@@ -111,8 +111,13 @@
         "tooltip": false
     },
     "custom/spotify": {
-        "format": "󰓇",
+        "format": "󰓇 ",
         "on-click": "spotify &",
+        "tooltip": false
+    },
+    "custom/steam": {
+        "format": "󰓓",
+        "on-click": "steam-native &",
         "tooltip": false
     },
     "custom/powermenu": {

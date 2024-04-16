@@ -75,6 +75,7 @@ tooltip label {
 #custom-terminal,
 #custom-file-manager,
 #custom-spotify,
+#custom-steam,
 #custom-powermenu,
 #cpu,
 #memory,
@@ -237,6 +238,11 @@ tooltip label {
     border-left: 0px;
 }
 #custom-spotify {
+    font-size: 18px;
+    border-left: 0px;
+}
+
+#custom-steam {
     font-size: 18px;
     border-radius: 0px 20px 20px 0px;
     padding-right: 15px;

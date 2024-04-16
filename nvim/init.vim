@@ -442,3 +442,7 @@ function! NumberToggle()
 endfunction
 
 nnoremap <C-n> :call NumberToggle()<CR>
+
+" Datalog 
+au BufRead,BufNewFile *.dl set filetype=dl
+
