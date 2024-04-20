@@ -10,7 +10,7 @@
         "custom/terminal", "custom/file-manager", "custom/spotify", "custom/steam", "cpu", "memory"],
     //"modules-left": ["clock","hyprland/window"],
     "modules-center": ["clock", "custom/spotify-logo", 
-        "custom/spotify-title", "custom/spotify-time", "custom/spotify-artist", 
+        "custom/spotify-title", "custom/spotify-artist", 
         "custom/spotify-prev", "custom/spotify-playpause", "custom/spotify-next"],
     "modules-right": ["backlight", "pulseaudio", "network", "bluetooth", "battery", "custom/notification"],
     "hyprland/workspaces": {
@@ -24,7 +24,7 @@
     },
     "clock": {
         "format": " {:%I:%M %p}",
-        // "format": " {:%I:%M %p - %a, %b%e}",
+        // "format": " {:%I:%M %p - %a, %b %e}",
         "tooltip-format": " {:%a, %b %e}"     
     },
     "backlight": {
