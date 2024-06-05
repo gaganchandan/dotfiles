@@ -11,7 +11,8 @@ $cmd_duration\
 ## FIRST LINE/ROW: Info & Status
 # First param ─┌
 [username]
-format = " [$user]($style) on "
+# format = " [$user]($style) on "
+format = " [$user]($style) @ "
 style_user = "bold blue"
 style_root = "bold red"
 show_always = true

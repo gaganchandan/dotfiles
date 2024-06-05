@@ -239,13 +239,8 @@ tooltip label {
 }
 #custom-spotify {
     font-size: 18px;
-    border-left: 0px;
-}
-
-#custom-steam {
-    font-size: 18px;
     border-radius: 0px 20px 20px 0px;
-    padding-right: 15px;
+    padding-right: 8px;
     border-left: 0px;
     border-right: 0px;
     margin-right: 5px;

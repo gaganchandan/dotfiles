@@ -7,10 +7,10 @@
     "gtk-layer-shell": true,
     "height": 30,
     "modules-left": ["custom/launcher", "hyprland/workspaces", "custom/firefox", 
-        "custom/terminal", "custom/file-manager", "custom/spotify", "custom/steam", "cpu", "memory"],
+        "custom/terminal", "custom/file-manager", "custom/spotify", "cpu", "memory"],
     //"modules-left": ["clock","hyprland/window"],
     "modules-center": ["clock", "custom/spotify-logo", 
-        "custom/spotify-title", "custom/spotify-artist", 
+        "custom/spotify-title", "custom/spotify-artist", "custom/spotify-time",
         "custom/spotify-prev", "custom/spotify-playpause", "custom/spotify-next"],
     "modules-right": ["backlight", "pulseaudio", "network", "bluetooth", "battery", "custom/notification"],
     "hyprland/workspaces": {
@@ -144,8 +144,10 @@
   },
   "custom/spotify-title": {
     "format": "{}",
+    "escape": "true",
     "max-length": 30,
     "exec": "$HOME/.config/waybar/spotify-title-script.sh",
+    // "exec": "$HOME/.config/waybar/spotify-name.sh",
     "exec-if": "pgrep spotify",
     "interval": 1,
     "tooltip": false
