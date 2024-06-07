@@ -97,7 +97,7 @@
     },
     "custom/terminal": {
         "format": "",
-        "on-click": "alacritty &",
+        "on-click": "kitty &",
         "tooltip" : false
     },
     "custom/firefox": {
@@ -127,12 +127,12 @@
     "cpu": {
         "format": "CPU: {usage}%",
         "tooltip": false,
-        "on-click": "alacritty -e bpytop"
+        "on-click": "kitty -e bpytop"
     },
     "memory": {
     "interval": 5,
     "format": "Memory: {used:0.1f}G/{total:0.1f}G",
-    "on-click": "alacritty -e bpytop",
+    "on-click": "kitty -e bpytop",
     "tooltip": false
     },
   "custom/spotify-logo": {
