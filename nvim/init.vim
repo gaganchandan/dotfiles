@@ -177,10 +177,10 @@ let g:indentLine_faster = 1
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
 
-highlight! Terminal guibg=#21252e
-au TermEnter * setlocal winhighlight=Normal:Terminal
-au TermEnter * setlocal scrolloff=0
-au TermLeave * setlocal scrolloff=3
+" highlight! Terminal guibg=#21252e
+" au TermEnter * setlocal winhighlight=Normal:Terminal
+" au TermEnter * setlocal scrolloff=0
+" au TermLeave * setlocal scrolloff=3
 
 "" Status bar
 set laststatus=2
@@ -446,3 +446,20 @@ nnoremap <C-n> :call NumberToggle()<CR>
 " Datalog 
 au BufRead,BufNewFile *.dl set filetype=dl
 
+" Terminal colours 
+let g:terminal_color_0 = '#2e3440'
+let g:terminal_color_1 = '#2e3440'
+let g:terminal_color_2 = '#2e3440'
+let g:terminal_color_3 = '#2e3440'
+let g:terminal_color_4 = '#2e3440'
+let g:terminal_color_5 = '#2e3440'
+let g:terminal_color_6 = '#2e3440'
+let g:terminal_color_7 = '#2e3440'
+let g:terminal_color_8 = '#2e3440'
+let g:terminal_color_9 = '#2e3440'
+let g:terminal_color_10 = '#2e3440'
+let g:terminal_color_11 = '#2e3440'
+let g:terminal_color_12 = '#2e3440'
+let g:terminal_color_13 = '#2e3440'
+let g:terminal_color_14 = '#2e3440'
+let g:terminal_color_15 = '#2e3440'
