@@ -400,6 +400,7 @@ lua require ("nvim-lint")
 " Prolog 
 let g:filetype_pl="prolog"
 autocmd BufNewFile,BufRead *.pl   set syntax=prolog
+autocmd BufNewFile,BufRead *.P   set syntax=prolog
 
 " My languages
 au BufRead,BufNewFile *.goto setfiletype goto
@@ -446,20 +447,6 @@ nnoremap <C-n> :call NumberToggle()<CR>
 " Datalog 
 au BufRead,BufNewFile *.dl set filetype=dl
 
-" Terminal colours 
-let g:terminal_color_0 = '#2e3440'
-let g:terminal_color_1 = '#2e3440'
-let g:terminal_color_2 = '#2e3440'
-let g:terminal_color_3 = '#2e3440'
-let g:terminal_color_4 = '#2e3440'
-let g:terminal_color_5 = '#2e3440'
-let g:terminal_color_6 = '#2e3440'
-let g:terminal_color_7 = '#2e3440'
-let g:terminal_color_8 = '#2e3440'
-let g:terminal_color_9 = '#2e3440'
-let g:terminal_color_10 = '#2e3440'
-let g:terminal_color_11 = '#2e3440'
-let g:terminal_color_12 = '#2e3440'
-let g:terminal_color_13 = '#2e3440'
-let g:terminal_color_14 = '#2e3440'
-let g:terminal_color_15 = '#2e3440'
+" Jump to next diagnostic 
+nnoremap <C-e> :lua vim.diagnostic.goto_next()<CR>
+inoremap <C-e> :lua vim.diagnostic.goto_next()<CR>
