@@ -140,7 +140,7 @@
   },
   "custom/steam": {
     "format": "󰓓",
-    "on-click": "steam-native &",
+    "on-click": "steam-native -cef-disable-gpu -no-cef-sandbox &",
     "tooltip": false,
   },
   "custom/powermenu": {

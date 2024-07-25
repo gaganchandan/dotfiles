@@ -12,3 +12,5 @@ set -gx PATH $HOME/.cabal/bin $PATH /home/gagan/.ghcup/bin # ghcup-env
 fish_add_path /home/gagan/.spicetify
 
 alias soot='java -cp /opt/soot/target/sootclasses-trunk-jar-with-dependencies.jar soot.Main -pp'
+
+zoxide init --cmd cd fish | source

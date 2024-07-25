@@ -17,3 +17,4 @@ theme='style-9'
 rofi \
     -show drun \
     -theme ${dir}/${theme}.rasi
+    -fuzzy
