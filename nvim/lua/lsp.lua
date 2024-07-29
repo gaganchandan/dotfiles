@@ -9,7 +9,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
     underline = true,
-    signs = true,
+    signs = false,
   }
 )
 vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float({scope="line"})]]
@@ -19,10 +19,23 @@ local cmp = require'cmp'
 local lspkind = require('lspkind')
 
 cmp.setup({
-    window = {
-        completion = { cmp.config.window.bordered(), winhighlight = 'FloatBorder:Border' },
-        documentation = { cmp.config.window.bordered(), winhighlight = 'FloatBorder:Border' },
+    -- window = {
+    --     completion = { cmp.config.window.bordered(), winhighlight = 'FloatBorder:Border' },
+    --     documentation = { cmp.config.window.bordered(), winhighlight = 'FloatBorder:Border' },
+    -- },
+      window = {
+    completion = { -- rounded border; thin-style scrollbar
+      border = 'rounded',
+      scrollbar = '║',
+      winhighlight = 'FloatBorder:Border',
     },
+    documentation = { -- no border; native-style scrollbar
+      border = nil,
+      scrollbar = '',
+      winhighlight = 'FloatBorder:Border',
+      -- other options
+    },
+},
 })
 
 cmp.setup {
@@ -87,7 +100,7 @@ local on_attach_enable_codelens = function(client)
     augroup END
   ]]
   vim.cmd [[ lua vim.lsp.codelens.refresh() ]]
-  return on_attach(client)
+  return nil
 end
 
 -- Haskell
@@ -105,7 +118,7 @@ nvim_lsp.hls.setup({
 nvim_lsp.ocamllsp.setup({
     cmd = { "ocamllsp" },
     filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
-    root_dir = nvim_lsp.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
+    root_dir = nvim_lsp.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace", "*"),
     on_attach = on_attach_enable_codelens,
 })
 
