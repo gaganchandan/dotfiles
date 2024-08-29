@@ -72,6 +72,7 @@ tooltip label {
 #tray,
 #backlight,
 #custom-firefox,
+#custom-browser,
 #custom-terminal,
 #custom-file-manager,
 #custom-spotify,
@@ -222,10 +223,15 @@ tooltip label {
   border-right: 0px;
   margin-left: 0px;
 }
-
 #custom-firefox {
   font-size: 15px;
   border-radius: 20px 0px 0px 20px;
+  /* margin-right: 5px; */
+}
+#custom-browser {
+  font-size: 18px;
+  border-radius: 20px 0px 0px 20px;
+  padding-right: 13px;
   /* margin-right: 5px; */
 }
 #custom-terminal {

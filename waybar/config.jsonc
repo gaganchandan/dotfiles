@@ -9,7 +9,7 @@
   "modules-left": [
     "custom/launcher",
     "hyprland/workspaces",
-    "custom/firefox",
+    "custom/browser",
     "custom/terminal",
     "custom/file-manager",
     "custom/spotify",
@@ -126,6 +126,11 @@
   "custom/firefox": {
     "format": "",
     "on-click": "firefox &",
+    "tooltip": false,
+  },
+  "custom/browser": {
+    "format": "󰖟",
+    "on-click": "zen &",
     "tooltip": false,
   },
   "custom/file-manager": {
