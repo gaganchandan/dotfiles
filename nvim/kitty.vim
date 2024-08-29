@@ -64,8 +64,8 @@ let no_buffers_menu=1
 set colorcolumn=0
 set noruler
 set fillchars=eob:\ 
-set cursorline
-hi CursorLine guibg=#373e4d
+set nocursorline
+" hi CursorLine guibg=#373e4d
 " hi CursorLineNR guibg=#373e4d
 
 " Better command line completion 

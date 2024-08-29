@@ -355,11 +355,19 @@ let g:neoformat_ocaml_ocamlformat = {
             \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-']
             \ }
 let g:neoformat_enabled_ocaml = ['ocamlformat']
+" let g:neoformat_enabled_ocaml = []
 let g:neoformat_haskell_ormolu = { 'exe': 'ormolu', 'args': [] }
 let g:neoformat_haskell_fourmolu = { 'exe': 'fourmolu', 'args': [] }
 let g:neoformat_enabled_haskell = ['ormolu']
 let g:neoformat_enabled_javascript = []
 " let g:neoformat_enabled_haskell = ['fourmolu']
+let g:neoformat_java_google = {
+            \ 'exe': 'google-java-format',
+            \ 'args': [' -'],
+            \ 'stdin': 1, 
+            \ }
+
+let g:neoformat_enabled_java = ['google']
 
 ""**********************************************************************
 " LSP and related config

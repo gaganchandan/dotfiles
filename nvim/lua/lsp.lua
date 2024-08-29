@@ -13,7 +13,9 @@ vim.lsp.diagnostic.on_publish_diagnostics, {
   }
 )
 vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float({scope="line"})]]
-vim.cmd [[autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()]]
+-- vim.cmd [[autocmd CursorHoldI * !silent lua vim.lsp.buf.signature_help()]]
+vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<C-y>', '<cmd>lua vim.lsp.buf.hover()<CR>', {silent = true})
 
 local cmp = require'cmp'
 local lspkind = require('lspkind')
@@ -91,6 +93,21 @@ vim.g.copilot_filetypes = {markdown = true}
 
 -- CodeLens for OCaml and Haskell
 
+local on_attach_ocaml = function(client) 
+if client.server_capabilities.code_lens then
+        local codelens = vim.api.nvim_create_augroup(
+            'LSPCodeLens',
+            { clear = true }
+        )
+        vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'CursorHold' }, {
+            group = codelens,
+            callback = function()
+                vim.lsp.codelens.refresh()
+            end,
+            buffer = bufnr,
+        })
+    end
+end
 local on_attach_enable_codelens = function(client)
   client.server_capabilities.code_lens = true
   vim.cmd [[
@@ -117,6 +134,14 @@ nvim_lsp.hls.setup({
 -- OCaml 
 nvim_lsp.ocamllsp.setup({
     cmd = { "ocamllsp" },
+    settings = {
+        codelens = {
+            enable = true,
+        },
+        inlayHints = {
+            enable = true,
+        },
+    },
     filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
     root_dir = nvim_lsp.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace", "*"),
     on_attach = on_attach_enable_codelens,
