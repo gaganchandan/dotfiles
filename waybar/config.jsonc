@@ -130,7 +130,8 @@
   },
   "custom/browser": {
     "format": "󰖟",
-    "on-click": "zen &",
+    // "format": "",
+    "on-click": "/home/gagan/.local/bin/zen &",
     "tooltip": false,
   },
   "custom/file-manager": {

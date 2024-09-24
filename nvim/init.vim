@@ -401,6 +401,7 @@ autocmd FileType coq nnoremap <C-u> <Cmd>CoqUndo<CR>
 autocmd FileType coq nnoremap <C-l> <Cmd>CoqToLine<CR>
 autocmd FileType coq nnoremap <C-t> <Cmd>CoqToTop<CR>
 autocmd BufReadPost *.v CoqStart
+let g:coqtail_coq_path = "/home/gagan/.opam/default/bin/"
 
 " nvim-lint
 lua require ("nvim-lint")
@@ -462,13 +463,16 @@ inoremap <C-e> :lua vim.diagnostic.goto_next()<CR>
 " Highlighting
 hi NormalFloat guibg=NONE
 
-function! s:hi(group, guifg, guibg)
+function! s:hi(group, guifg, guibg, attr)
   let cmd = ""
   if a:guifg != ""
     let cmd = cmd . " guifg=" . a:guifg
   endif
   if a:guibg != ""
     let cmd = cmd . " guibg=" . a:guibg
+  endif
+  if a:attr != ""
+    let cmd = cmd . " gui=" . a:attr . " cterm=" . substitute(a:attr, "undercurl", s:underline, "")
   endif
   if cmd != ""
     exec "hi " . a:group . cmd
@@ -494,7 +498,12 @@ let s:nord13_gui = "#EBCB8B"
 let s:nord14_gui = "#A3BE8C"
 let s:nord15_gui = "#B48EAD"
 
-call s:hi("@lsp.type.namespace", s:nord7_gui, "")
-call s:hi("@lsp.type.class.java", s:nord7_gui, "")
-call s:hi("ocamlConstructor", s:nord7_gui, "")
-call s:hi("haskellIdentifier", s:nord9_gui, "")
+let g:nord_underline = get(g:, "nord_underline", 1)
+let s:underline = (g:nord_underline == 0) ? "NONE," : "underline,"
+
+call s:hi("@lsp.type.namespace", s:nord7_gui, "", "")
+call s:hi("@lsp.type.class.java", s:nord7_gui, "", "")
+call s:hi("ocamlConstructor", s:nord7_gui, "", "")
+call s:hi("haskellIdentifier", s:nord9_gui, "", "")
+call s:hi("coqProofDelim", s:nord8_gui, "", s:underline)
+call s:hi("coqGoalNumber", s:nord8_gui, "", s:underline)

@@ -57,7 +57,7 @@ text = "#2e3440"
 size = 11.5
 
 [font.normal]
-family = "JetBrains Mono Nerd Font"
+family = "JetBrainsMono Nerd Font"
 
 [window.padding]
 x = 0
