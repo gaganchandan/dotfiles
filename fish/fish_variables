@@ -40,4 +40,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/gagan/\x2espicetify\x1e/home/gagan/\x2eghcup/bin/\x1e/home/gagan/\x2eopam/default/bin\x1e/home/gagan/\x2elocal/bin\x1e/usr/local/bin\x1e/usr/bin\x1e/bin\x1e/usr/local/sbin\x1e/usr/lib/jvm/default/bin\x1e/usr/bin/site_perl\x1e/usr/bin/vendor_perl\x1e/usr/bin/core_perl\x1e/home/gagan/\x2ecargo/bin
+SETUVAR fish_user_paths:/home/gagan/\x2espicetify\x1e/home/gagan/\x2eghcup/bin/\x1e/home/gagan/\x2eopam/default/bin\x1e/home/gagan/\x2elocal/bin\x1e/usr/local/bin\x1e/usr/bin\x1e/bin\x1e/usr/local/sbin\x1e/usr/lib/jvm/default/bin\x1e/usr/bin/site_perl\x1e/usr/bin/vendor_perl\x1e/usr/bin/core_perl\x1e/home/gagan/\x2ecargo/bin\x1e/home/gagan/\x2eelan/bin

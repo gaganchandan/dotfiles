@@ -83,6 +83,9 @@ Plug 'neoclide/jsonc.vim'
 " Java 
 Plug 'mfussenegger/nvim-jdtls'
 
+" Lean 
+Plug 'Julian/lean.nvim'
+
 "*****************************************************************************
 "" Additional colorschemes
 "*****************************************************************************
@@ -354,8 +357,8 @@ let g:neoformat_ocaml_ocamlformat = {
             \ 'stdin': 1,
             \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-']
             \ }
-let g:neoformat_enabled_ocaml = ['ocamlformat']
-" let g:neoformat_enabled_ocaml = []
+" let g:neoformat_enabled_ocaml = ['ocamlformat']
+let g:neoformat_enabled_ocaml = []
 let g:neoformat_haskell_ormolu = { 'exe': 'ormolu', 'args': [] }
 let g:neoformat_haskell_fourmolu = { 'exe': 'fourmolu', 'args': [] }
 let g:neoformat_enabled_haskell = ['ormolu']

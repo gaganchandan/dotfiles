@@ -23,3 +23,7 @@ zoxide init --cmd cd fish | source
 # This section can be safely removed at any time if needed.
 test -r '/home/gagan/.opam/opam-init/init.fish' && source '/home/gagan/.opam/opam-init/init.fish' >/dev/null 2>/dev/null; or true
 # END opam configuration
+
+# >>> coursier install directory >>>
+set -gx PATH "$PATH:/home/gagan/.local/share/coursier/bin"
+# <<< coursier install directory <<<
