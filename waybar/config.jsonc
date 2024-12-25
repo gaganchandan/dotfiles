@@ -141,7 +141,7 @@
   },
   "custom/spotify": {
     "format": "󰓇 ",
-    "on-click": "spotify &",
+    "on-click": "spotify-launcher &",
     "tooltip": false,
   },
   "custom/steam": {

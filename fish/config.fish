@@ -27,3 +27,7 @@ test -r '/home/gagan/.opam/opam-init/init.fish' && source '/home/gagan/.opam/opa
 # >>> coursier install directory >>>
 set -gx PATH "$PATH:/home/gagan/.local/share/coursier/bin"
 # <<< coursier install directory <<<
+
+# >>> go path 
+set -gx GOPATH $HOME/go
+set -gx PATH "$PATH:$GOPATH/bin"

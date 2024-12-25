@@ -148,3 +148,23 @@ nvim_lsp.ocamllsp.setup({
 })
 
 -- require'lspconfig'.ocamllsp.setup{}
+
+-- nvim_lsp.metals.setup({
+--     cmd = { "metals" },
+--     filetypes = { "scala" },
+--     root_dir = nvim_lsp.util.root_pattern("build.sbt", "pom.xml", "build.sc", "build.gradle", ".git", "*"),
+--     message_level = vim.lsp.protocol.MessageType.Log,
+--     init_options = {
+--       statusBarProvider = 'show-message',
+--       isHttpEnabled = true,
+--       compilerOptions = {
+--         snippetAutoIndent = false,
+--       },
+--     },
+--     capabilities = {
+--       workspace = {
+--         configuration = false,
+--       },
+--     },
+--   })
+
