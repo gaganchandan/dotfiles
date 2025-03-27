@@ -69,7 +69,12 @@ run_cmd() {
 		elif [[ $1 == '--hibernate' ]]; then
 			systemctl hibernate
 		elif [[ $1 == '--suspend' ]]; then
-			systemctl suspend
+			if [[ "$DESKTOP_SESSION" == 'i3' ]]; then
+                systemctl suspend
+			elif [[ "$DESKTOP_SESSION" == 'hyprland' ]]; then
+			    # swaylock
+                systemctl suspend
+            fi
 		elif [[ $1 == '--logout' ]]; then
 			if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
 				openbox --exit
@@ -101,7 +106,7 @@ case ${chosen} in
 		run_cmd --hibernate
         ;;
     $lock)
-		betterlockscreen -l
+		hyprlock
         ;;
     $suspend)
 		run_cmd --suspend

@@ -5,17 +5,13 @@ lsp.setup()
 
 local nvim_lsp = require('lspconfig')
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    underline = true,
-    signs = false,
-  }
-)
 vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float({scope="line"})]]
--- vim.cmd [[autocmd CursorHoldI * !silent lua vim.lsp.buf.signature_help()]]
-vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-y>', '<cmd>lua vim.lsp.buf.hover()<CR>', {silent = true})
+vim.cmd [[autocmd CursorHoldI * !silent lua vim.lsp.buf.signature_help()]]
+vim.api.nvim_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', {silent = true})
+vim.api.nvim_set_keymap('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>', {silent = true})
+vim.api.nvim_set_keymap('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>', {silent = true})
+
 
 local cmp = require'cmp'
 local lspkind = require('lspkind')
@@ -146,6 +142,46 @@ nvim_lsp.ocamllsp.setup({
     root_dir = nvim_lsp.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace", "*"),
     on_attach = on_attach_enable_codelens,
 })
+
+require('lspconfig.configs').flix = {
+    default_config =
+    {
+        cmd = { "java", "-jar", "/home/gagan/Code/Flix/flix.jar", "lsp"  },
+        filetypes = { "flix" },
+        root_dir = nvim_lsp.util.root_pattern("build.gradle", ".git", "*"),
+    };
+}
+
+nvim_lsp.flix.setup({
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
+    on_attach = function(_, bufnr)
+        print("Flix LSP attached to buffer " .. bufnr)
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, bufopts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+        vim.keymap.set("n", "<leader>h", vim.lsp.buf.document_highlight, bufopts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+        vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, bufopts)
+    end,
+    flags = {},
+})
+
+local setup = function(server)
+    server.setup {
+      autostart = true,
+      on_attach = on_attach,
+      flags = {
+        debounce_text_changes = 150,
+      },
+      capabilities = capabilities
+    }
+  end
+
+setup(require('ionide'))
 
 -- require'lspconfig'.ocamllsp.setup{}
 

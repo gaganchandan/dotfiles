@@ -237,14 +237,17 @@ tooltip label {
 #custom-terminal {
   font-size: 18px;
   border-left: 0px;
+  padding-right: 17px;
 }
 #custom-file-manager {
   font-size: 18px;
   border-left: 0px;
+  padding-right: 14.5px;
 }
 #custom-spotify {
   font-size: 18px;
   border-left: 0px;
+  padding-right: 13.5px;
 }
 #custom-steam {
   font-size: 18px;
@@ -289,5 +292,5 @@ tooltip label {
   margin-right: 5px;
   margin-left: 7px;
   font-size: 18px;
-  padding-right: 17px;
+  padding-right: 13.5px;
 }

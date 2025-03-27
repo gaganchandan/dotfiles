@@ -42,6 +42,11 @@ Plug 'kana/vim-textobj-user'
 Plug 'github/copilot.vim'
 Plug 'mfussenegger/nvim-lint'
 Plug 'letieu/hacker.nvim'
+Plug 'mfussenegger/nvim-lint'
+Plug 'joom/latex-unicoder.vim'
+Plug 'mjbrownie/hackertyper.vim'
+Plug 'https://github.com/echasnovski/mini.nvim'
+Plug 'j-hui/fidget.nvim'
 
 "*****************************************************************************
 "" Custom bundles
@@ -69,8 +74,30 @@ Plug 'derekelkins/agda-vim'
 " IPython
 Plug 'bfredl/nvim-ipy'
 
+" Prolog 
+Plug 'adimit/prolog.vim'
+
+" Verilog
+Plug 'vhda/verilog_systemverilog.vim'
+
 " LaTeX
 Plug 'lervag/vimtex'
+
+" jsonc
+Plug 'neoclide/jsonc.vim'
+
+" Rust 
+" Plug 'https://github.com/mrcjkb/rustaceanvim'
+
+" Java 
+Plug 'mfussenegger/nvim-jdtls'
+
+" Lean 
+Plug 'Julian/lean.nvim'
+
+" Scala 
+Plug 'scalameta/nvim-metals'
+
 
 "*****************************************************************************
 "*****************************************************************************
@@ -221,6 +248,54 @@ cnoremap <C-v> <C-r>+
 vmap < <gv
 vmap > >gv
 
+" Highlighting
+hi NormalFloat guibg=NONE
+
+function! s:hi(group, guifg, guibg, attr)
+  let cmd = ""
+  if a:guifg != ""
+    let cmd = cmd . " guifg=" . a:guifg
+  endif
+  if a:guibg != ""
+    let cmd = cmd . " guibg=" . a:guibg
+  endif
+  if a:attr != ""
+    let cmd = cmd . " gui=" . a:attr . " cterm=" . substitute(a:attr, "undercurl", s:underline, "")
+  endif
+  if cmd != ""
+    exec "hi " . a:group . cmd
+  endif
+endfunction
+
+
+let s:nord0_gui = "#2E3440"
+let s:nord1_gui = "#3B4252"
+let s:nord2_gui = "#434C5E"
+let s:nord3_gui = "#4C566A"
+let s:nord3_gui_bright = "#616E88"
+let s:nord4_gui = "#D8DEE9"
+let s:nord5_gui = "#E5E9F0"
+let s:nord6_gui = "#ECEFF4"
+let s:nord7_gui = "#8FBCBB"
+let s:nord8_gui = "#88C0D0"
+let s:nord9_gui = "#81A1C1"
+let s:nord10_gui = "#5E81AC"
+let s:nord11_gui = "#BF616A"
+let s:nord12_gui = "#D08770"
+let s:nord13_gui = "#EBCB8B"
+let s:nord14_gui = "#A3BE8C"
+let s:nord15_gui = "#B48EAD"
+
+let g:nord_underline = get(g:, "nord_underline", 1)
+let s:underline = (g:nord_underline == 0) ? "NONE," : "underline,"
+
+call s:hi("@lsp.type.namespace", s:nord7_gui, "", "")
+call s:hi("@lsp.type.class.java", s:nord7_gui, "", "")
+call s:hi("ocamlConstructor", s:nord7_gui, "", "")
+call s:hi("haskellIdentifier", s:nord9_gui, "", "")
+call s:hi("coqProofDelim", s:nord8_gui, "", s:underline)
+call s:hi("coqGoalNumber", s:nord8_gui, "", s:underline)
+
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
@@ -248,6 +323,9 @@ augroup END
 " Syntax highlight
 let python_highlight_all = 1
 
+" html
+autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab
+
 "vim-markdown
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
@@ -261,12 +339,18 @@ let g:vim_markdown_json_frontmatter = 1
 let g:coqtail_coq_path = "/usr/bin/"
 let g:coqtail_coq_prog = "coqidetop.opt"
 
+" verilog 
+autocmd FileType verilog_systemverilog setlocal tabstop=2 shiftwidth=2 expandtab
+
 " LaTeX 
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
+
+" Jupyter
+Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
 
 "*****************************************************************************
 ""User defined
@@ -389,7 +473,7 @@ nnoremap <silent> <C-d> <Cmd>BufClose<CR>
 
 nnoremap <silent> <C-f> <Cmd>vsp<CR>
 
-set guifont=JetBrainsMono\ Nerd\ Font:h8.5
+set guifont=JetBrainsMono\ Nerd\ Font:h10
 
 " Isabelle
 au BufRead,BufNewFile *.thy setfiletype isabelle

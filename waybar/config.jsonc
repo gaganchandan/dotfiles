@@ -46,7 +46,7 @@
     "spacing": 10,
   },
   "clock": {
-    "format": " {:%I:%M %p}",
+    "format": "  {:%I:%M %p}",
     // "format": " {:%I:%M %p - %a, %b %e}",
     "tooltip-format": " {:%a, %b %e}",
   },
@@ -99,7 +99,7 @@
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
-    "format-wifi": " {essid}",
+    "format-wifi": "  {essid}",
     "format-ethernet": "{ipaddr}/{cidr} ",
     "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
     "format-linked": "{ifname} (No IP) ",
@@ -135,12 +135,12 @@
     "tooltip": false,
   },
   "custom/file-manager": {
-    "format": " ",
-    "on-click": "thunar &",
+    "format": "",
+    "on-click": "nautilus &",
     "tooltip": false,
   },
   "custom/spotify": {
-    "format": "󰓇 ",
+    "format": "󰓇",
     "on-click": "spotify-launcher &",
     "tooltip": false,
   },

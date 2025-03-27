@@ -25,9 +25,12 @@ Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-cmdline', { 'branch': 'main' }
+Plug 'hrsh7th/cmp-vsnip', { 'branch': 'main' }
+Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'VonHeikemen/lsp-zero.nvim'
@@ -38,10 +41,12 @@ Plug 'mfussenegger/nvim-lint'
 Plug 'joom/latex-unicoder.vim'
 Plug 'mjbrownie/hackertyper.vim'
 Plug 'https://github.com/echasnovski/mini.nvim'
-Plug 'sphamba/smear-cursor.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'samsze0/utils.nvim'
 Plug 'samsze0/websocket.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.3' }
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 "*****************************************************************************
 "" Custom bundles
@@ -92,6 +97,9 @@ Plug 'Julian/lean.nvim'
 
 " Scala 
 Plug 'scalameta/nvim-metals'
+
+" F#
+Plug 'ionide/Ionide-vim'
 
 "*****************************************************************************
 "" Additional colorschemes
@@ -241,6 +249,7 @@ set noerrorbells visualbell t_vb=
 if has('autocmd')
   autocmd GUIEnter * set visualbell t_vb=
 endif
+set belloff=all
 
 "" Copy/Paste/Cut
 set clipboard=unnamedplus
@@ -327,11 +336,11 @@ augroup vimrc-python
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
-" html
-autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab
-
 " Syntax highlight
 let python_highlight_all = 1
+
+" html
+autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab
 
 "vim-markdown
 let g:vim_markdown_folding_disabled = 1
@@ -353,8 +362,9 @@ autocmd FileType verilog_systemverilog setlocal tabstop=2 shiftwidth=2 expandtab
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-set conceallevel=1
+set conceallevel=2
 let g:tex_conceal='abdmg'
+hi Conceal guibg=NONE guifg=#888f9e
 
 " Jupyter
 Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
@@ -373,12 +383,6 @@ nnoremap <silent>    <C-n> <Cmd>enew<CR>
 lua require('lualine-term-config')
 
 " Making life easier
-inoremap <C-z> <Esc>
-tnoremap <C-z> <C-\><C-n>
-vnoremap <C-z> <Esc>
-cnoremap <C-z> <C-C>
-nnoremap <C-z> <Esc>
-snoremap <C-z> <Esc>
 nnoremap <silent>    <C-x> <Cmd>:q!<CR>
 nnoremap a i
 cnoreabbrev W! w!
@@ -425,7 +429,7 @@ let g:neoformat_java_google = {
             \ 'stdin': 1, 
             \ }
 
-let g:neoformat_enabled_java = ['google']
+" let g:neoformat_enabled_java = ['google']
 
 ""**********************************************************************
 " LSP and related config
@@ -444,9 +448,9 @@ highlight! CmpItemAbbrMatch guibg=NONE guifg=#a1c7ed
 "***********************************************************************
 "***********************************************************************
 
-let $PATH="/home/gagan/.ghcup/bin/:/home/gagan/.cabal/bin/:/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bin:/home/gagan/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin/:/home/gagan/.local/share/coursier/bin/"
+let $PATH="/home/gagan/.ghcup/bin/:/home/gagan/.cabal/bin/:/home/gagan/.local/share/nvim/mason/bin/:/home/gagan/.opam/default/bin:/home/gagan/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin/:/home/gagan/.local/share/coursier/bin/:/home/gagan/.dotnet/tools/"
 
-autocmd BufRead,BufNewFile * setlocal signcolumn=yes
+autocmd BufRead,BufNewFile * setlocal signcolumn=no
 
 " nvim-autopairs
 lua require('nvim-autopairs-config')
@@ -543,7 +547,7 @@ function! NumberToggle()
     endif
 endfunction
 
-nnoremap <C-n> :call NumberToggle()<CR>
+nnoremap <leader>n :call NumberToggle()<CR>
 
 " Datalog 
 au BufRead,BufNewFile *.dl set filetype=dl
@@ -552,7 +556,37 @@ au BufRead,BufNewFile *.dl set filetype=dl
 nnoremap <C-e> :lua vim.diagnostic.goto_next()<CR>
 inoremap <C-e> :lua vim.diagnostic.goto_next()<CR>
 
+" Telescope
+nnoremap <C-b> <Cmd>Telescope buffers<CR>
+nnoremap <C-f> <Cmd>Telescope find_files<CR>
+nnoremap <C-s> <Cmd>Telescope live_grep<CR>
+
 " fidget
 :lua << EOF
 require("fidget").setup {}
 EOF
+
+" NvimTree 
+lua require("nvim-tree-config")
+nno <leader>a :NvimTreeToggle<CR>
+
+" Splits 
+hi WinSeparator guifg=#81a1c1
+
+" LSP signature 
+" lua require("lsp_signature").on_attach()
+
+" Ionide 
+function! s:fsharp()
+  let g:fsharp#lsp_auto_setup = 0
+
+  if has('nvim') && exists('*nvim_open_win')
+    set updatetime=1000
+    augroup FSharpShowTooltip
+      autocmd!
+      autocmd CursorHold *.fs,*.fsi,*.fsx call fsharp#showTooltip()
+    augroup END
+  endif
+
+  let g:fsharp#exclude_project_directories = ['paket-files']
+endfunction
